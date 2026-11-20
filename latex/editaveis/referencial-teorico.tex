@@ -2,6 +2,8 @@
 
 Este capítulo apresenta os principais conceitos que fundamentam a avaliação da eficácia de suítes de testes automatizados por meio de testes de mutação. Inicialmente, são abordados os fundamentos da Engenharia de Software Experimental e a mineração de repositórios de software, que servem de base para a investigação empírica proposta. Em seguida, são apresentados os conceitos relacionados aos testes automatizados, às métricas de cobertura e à capacidade de detecção de defeitos. Por fim, são discutidos os fundamentos dos testes de mutação, seus operadores, métricas, limitações e sua aplicação no contexto de aplicações web.
 
+\todo[inline, color=pink]{Exemplo de nota ao longo do texto, na cor rosa.}
+
 
 \section{Engenharia de Software Experimental}
 
@@ -15,6 +17,8 @@ Nos experimentos controlados, o pesquisador busca avaliar os efeitos de determin
 
 Independentemente da estratégia adotada, a definição clara do problema, das unidades de análise e das métricas utilizadas é necessária para que os resultados possam ser interpretados de maneira adequada.
 
+\todo[inline, color=pink]{Faltou caracterizar melhor a engenharia de software empírica/experimental, os principais métodos e estratégias de pesquisa e relação com a mineração de repositorios de codigo-fonte. Ex: os experimentos, estuddos de caso, etc. Tem todo o livro do wohlin, o guia da revisão. Ainda tem o capitulo 4 que é exatamento o planejamento do estudo emprírico. Ficou muito superficial.}
+
 \subsection{Planejamento e Mensuração em Estudos Empíricos}
 
 \citeonline{wohlin2015} descrevem a experimentação como um processo que abrange a definição e o planejamento do estudo, sua execução, a análise e a interpretação dos dados e a apresentação dos resultados. No planejamento, são definidos o contexto, os objetos de estudo, as variáveis e os procedimentos de coleta e análise. A abordagem \textit{Goal Question Metric} (GQM) orienta a escolha das métricas ao desdobrar os objetivos da investigação em perguntas e selecionar as medidas necessárias para respondê-las.
@@ -23,7 +27,7 @@ O planejamento também deve considerar as ameaças à validade interna, externa,
 
 \subsection{Mineração de Repositórios de Software}
 
-A mineração de repositórios de software, conhecida como Mining Software Repositories (MSR) ou Repository Mining, é uma abordagem de pesquisa empírica que utiliza dados armazenados em repositórios de software para investigar características dos sistemas, seu desenvolvimento e sua evolução. Segundo \citeonline{hassan2008}, seu objetivo é analisar e relacionar informações disponíveis nesses repositórios para identificar padrões e produzir conhecimentos que possam apoiar decisões durante o desenvolvimento e a manutenção de software.
+A mineração de repositórios de software, conhecida como \textit{Mining Software Repositories (MSR)} ou \textit{ Repository Mining}, é uma abordagem de pesquisa empírica que utiliza dados armazenados em repositórios de software para investigar características dos sistemas, seu desenvolvimento e sua evolução. Segundo \citeonline{hassan2008}, seu objetivo é analisar e relacionar informações disponíveis nesses repositórios para identificar padrões e produzir conhecimentos que possam apoiar decisões durante o desenvolvimento e a manutenção de software.
 
 Os repositórios armazenam diferentes tipos de informações, como código-fonte, histórico de modificações, registros de defeitos, mensagens de commits e comunicações entre desenvolvedores. \citeonline{hassan2008} classifica essas fontes em repositórios históricos, que registram a evolução dos projetos; repositórios de execução, que armazenam informações sobre o funcionamento dos sistemas; e repositórios de código, que disponibilizam implementações de software. A análise conjunta dessas informações permite investigar aspectos que nem sempre podem ser identificados apenas pela observação do código-fonte.
 
@@ -31,7 +35,7 @@ Os repositórios armazenam diferentes tipos de informações, como código-fonte
 
 \citeonline{hassan2008} ressalta que uma das principais contribuições da mineração de repositórios é transformar registros utilizados originalmente para armazenar informações em fontes de conhecimento para a tomada de decisões. Por exemplo, o histórico de modificações e os registros de defeitos podem ser relacionados para identificar componentes que apresentaram problemas recorrentes e, assim, apoiar a priorização de atividades de manutenção e teste.
 
-No contexto deste trabalho, a mineração de repositórios será utilizada para selecionar e obter dados de aplicações web de código aberto, especialmente seus códigos-fonte e suítes de testes automatizados. Esses artefatos servirão de base para a aplicação dos testes de mutação, permitindo avaliar a capacidade das suítes de identificar alterações artificiais introduzidas no código.
+No contexto deste trabalho, a mineração de repositórios será utilizada para selecionar e obter dados de aplicações web de código aberto, especialmente seus códigos-fonte e suítes de testes automatizados. Esses artefatos servirão de base para a aplicação dos testes de mutação, permitindo avaliar a capacidade das suítes em identificar alterações artificiais introduzidas no código.
 
 \subsubsection{Seleção e Extração de Dados}
 
@@ -44,6 +48,9 @@ Os critérios de seleção devem considerar características relevantes para a p
 Após a extração, os dados devem ser examinados e preparados para análise. Registros incompletos, inconsistências e diferenças entre repositórios podem afetar a interpretação dos resultados \cite{hassan2008}. Por isso, é importante explicitar como esses problemas foram tratados e discutir as ameaças à validade associadas à seleção, à coleta e à análise \cite{vidoni2022}.
 
 Para favorecer a reprodutibilidade, devem ser registrados os repositórios e as versões analisadas, as datas de coleta, os dados extraídos, as ferramentas utilizadas e os procedimentos de processamento e análise. Esse registro permite rastrear a origem dos resultados e repetir o procedimento sobre as mesmas versões dos repositórios \cite{vidoni2022}.
+
+
+\todo[inline, color=pink]{Incluir uma subseção que  apresente o assunto de qualidade de produto de software, relacionando modelos de qualidade de referencia, como a ISO/IEC 25010, com a avaliação de testes automatizados. Destaquem que o teste de software é uma atividade de verificação e validação que contribui para a avaliação da qualidade do produto.}
 
 \section{Testes de Software}
 
@@ -183,11 +190,11 @@ Nesse contexto, \citeonline{ammann2016} apresentam duas abordagens gerais para r
 
 Dessa forma, a definição dos operadores deve considerar a linguagem de programação, as características do sistema e os objetivos da avaliação.
 
-\subsection{Mutation Score e Avaliação da Eficácia}
+\subsection{Indicador de Mutação e Avaliação da Eficácia}
 
-O \textit{Mutation Score} é uma métrica utilizada para quantificar a adequação de uma suíte de testes em relação ao conjunto de mutantes gerados.
+O Indicador de Mutação (\textit{Mutation Score}) é uma métrica utilizada para quantificar a adequação de uma suíte de testes em relação ao conjunto de mutantes gerados.
 
-Segundo \citeonline{ammann2016}, o critério de cobertura por mutação considera que cada mutante estabelece um requisito de teste, que consiste em encontrar ao menos um caso capaz de identificá-lo. Dessa forma, o \textit{Mutation Score} representa a proporção de mutantes mortos em relação ao total de mutantes não equivalentes considerados na avaliação.
+Segundo \citeonline{ammann2016}, o critério de cobertura por mutação considera que cada mutante estabelece um requisito de teste, que consiste em encontrar ao menos um caso capaz de identificá-lo. Dessa forma, o Indicador de Mutação representa a proporção de mutantes mortos em relação ao total de mutantes não equivalentes considerados na avaliação.
 
 O cálculo da métrica pode ser representado pela seguinte expressão:
 
@@ -200,10 +207,13 @@ Em que $K$ representa a quantidade de mutantes mortos, $M$ corresponde ao total 
 
 Um resultado de 90\%, por exemplo, indica que a suíte conseguiu detectar 80\% dos mutantes válidos e não equivalentes considerados na avaliação.
 
-Entretanto, alcançar resultado alto como esse pode ser difícil na prática. Por esse motivo, os autores também apresentam a possibilidade de estabelecer um limiar mínimo de adequação, utilizado para orientar a continuidade do processo de testes.
+Entretanto, alcançar resultado alto como esse pode ser difícil, na prática. Por esse motivo, os autores também apresentam a possibilidade de estabelecer um limiar mínimo de adequação, utilizado para orientar a continuidade do processo de testes.
 
-É importante destacar que a adequação é relativa ao conjunto de mutantes utilizado. Uma suíte que apresenta um \textit{Mutation Score} elevado não necessariamente consegue detectar todos os defeitos reais do programa, pois os mutantes representam apenas as alterações produzidas pelos operadores selecionados.
+É importante destacar que a adequação é relativa ao conjunto de mutantes utilizado. Uma suíte que apresenta um Indicador de Mutação elevado não necessariamente consegue detectar todos os defeitos reais do programa, pois os mutantes representam apenas as alterações produzidas pelos operadores selecionados.
 
 A relação entre detecção de mutantes e defeitos reais também é importante para a interpretação dessa métrica. \citeonline{just2014} discutem a utilização de mutantes como uma aproximação para avaliar a capacidade de detecção de defeitos reais, embora reconheçam que nem todos os defeitos possam ser representados pelas alterações artificiais disponíveis.
 
 Dessa forma, sua interpretação pode ser complementada por informações como cobertura de código, quantidade de mutantes sobreviventes, operadores aplicados e características dos casos de teste avaliados. Esses indicadores permitem compreender melhor os resultados da avaliação e identificar possíveis limitações das suítes automatizadas.
+
+
+\todo[inline, color=pink]{Essa parte de testes automatizados e testes de mutação ficou muito boa. Contudo, como você precisaram acertar a parte de engenharia de software experimental, talvez seja necessário resumir mais um pouco. Vejam essa equilíbrio no total de páginas do tcc. }
