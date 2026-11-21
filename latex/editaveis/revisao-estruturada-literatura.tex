@@ -131,72 +131,15 @@ Após a conclusão da leitura dos artigos aprovados, os dados foram extraídos u
 
 Com a planilha devidamente estruturada, procedeu-se à análise quantitativa e qualitativa do corpus de 37 artigos para responder às questões de pesquisa secundárias estabelecidas no planejamento desta investigação. Os principais resultados obtidos são apresentados e discutidos nas subseções a seguir.
 
-\subsection[Quais métricas são mais utilizadas na literatura?]{Quais métricas são mais utilizadas na literatura para quantificar 
+\subsection[Quais métricas são mais utilizadas na literatura?]{Quais métricas são mais utilizadas na literatura para quantificar
 a eficácia das suítes de testes em aplicações web?}
 \label{subsec:metricas-utilizadas}
 
 O \textit{mutation score} é a métrica mais utilizada: 29 dos 37 estudos (81\%) o adotam ou usam uma variante diretamente equivalente, como o \textit{kill score}, a cobertura de mutação ou a contagem de mutantes mortos. Em seguida aparecem as contagens e taxas de mutantes mortos, vivos, equivalentes e teimosos (12 estudos, 33\%) e as métricas de cobertura de código (9 estudos, 25\%). Com menor frequência surgem métricas de qualidade da seleção de mutantes, de custo e de validade frente a falhas reais. Apenas dois estudos não usam o \textit{mutation score} nem derivados dele: o CBUA usa somente cobertura de código \cite{zhang2022} e o DeepMutation reporta apenas métricas da própria ferramenta \cite{tufano2020}.
 
-Uma ressalva importante: apenas um dos 37 estudos avalia suítes de testes de aplicações web \cite{yandrapally2021}. As frequências da Tabela~\ref{tab:metricas-utilizadas} descrevem a literatura de teste de mutação em geral, majoritariamente sobre programas Java e C. 
-
-\begingroup
-\footnotesize
-\setlength{\tabcolsep}{4pt}
-\begin{longtable}{|p{0.28\textwidth}|>{\centering\arraybackslash}p{0.08\textwidth}|>{\centering\arraybackslash}p{0.07\textwidth}|p{0.51\textwidth}|}
-    \caption{Métricas utilizadas para quantificar a eficácia das suítes de testes}
-    \label{tab:metricas-utilizadas} \\
-    
-    % --- Cabeçalho da PRIMEIRA página ---
-    \hline
-    \textbf{Categoria de métrica} & \textbf{Estudos} & \textbf{\%} & \textbf{Referências} \\
-    \hline
-    \endfirsthead
-
-    % --- Cabeçalho das PÁGINAS SEGUINTES ---
-    \multicolumn{4}{c}{\footnotesize\textit{Continuação da Tabela~\ref{tab:metricas-eficacia}}} \\
-    \hline
-    \textbf{Categoria de métrica} & \textbf{Estudos} & \textbf{\%} & \textbf{Referências} \\
-    \hline
-    \endhead
-
-    % --- Rodapé intermediário ---
-    \hline
-    \endfoot
-
-    % --- Rodapé FINAL ---
-    \hline
-    \multicolumn{4}{c}{\footnotesize Fonte: Autor (2026).} \\
-    \endlastfoot
-
-    % --- Conteúdo da tabela ---
-    \textit{Mutation score} e variantes diretas (\textit{kill score}, cobertura de mutação, contagem de mutantes mortos) & 29 & 81\% & \citeonline{chauhan2015}; \citeonline{guerino2024}; \citeonline{yandrapally2021}; \citeonline{inozemtseva2013}; \citeonline{alenezi2016}; \citeonline{dimov2010}; \citeonline{just2014} \\
-    \hline
-    Contagens e taxas de mutantes mortos, vivos, equivalentes e teimosos & 12 & 33\% & \citeonline{just2012}; \citeonline{esterobotaro2010}; \citeonline{belli2011}; \citeonline{guerino2024}; \citeonline{lin2018}; \citeonline{petrovic2021}; \citeonline{arasteh2023}; \citeonline{yandrapally2021}; \citeonline{kintis2010}; \citeonline{yao2014}; \citeonline{assylbekov2013}; \citeonline{arasteh2022} \\
-    \hline
-    Cobertura de código (linha, instrução, ramo e método) & 9 & 25\% & \citeonline{nica2011}; \citeonline{assylbekov2013}; \citeonline{yao2014}; \citeonline{just2014}; \citeonline{ahmed2016}; \citeonline{alenezi2016}; \citeonline{grano2019}; \citeonline{petrovic2021}; \citeonline{zhang2022} \\
-    \hline
-    Qualidade da seleção ou da aproximação do \textit{mutation score} & 7 & 19\% & \citeonline{zhang2010}; \citeonline{kurtz2016}; \citeonline{zhang2019}; \citeonline{kuroishi2020}; \citeonline{guizzo2022}; \citeonline{ashong2025}; \citeonline{ashong2026} \\
-    \hline
-    Custo e redução de mutantes (tempo de execução, número de mutantes, taxa de redução, esforço) & 6 & 17\% & \citeonline{just2012}; \citeonline{kurtz2016}; \citeonline{tufano2020}; \citeonline{guizzo2022}; \citeonline{arasteh2022}; \citeonline{arasteh2023} \\
-    \hline
-    Tamanho da suíte de testes e cobertura relativa entre critérios & 4 & 11\% & \citeonline{dimov2010}; \citeonline{kintis2010}; \citeonline{guerino2024}; \citeonline{ashong2026} \\
-    \hline
-    Validade frente a falhas reais (detecção de falhas reais, acoplamento) & 3 & 8\% & \citeonline{just2014}; \citeonline{petrovic2021}; \citeonline{khanfir2023} \\
-    \hline
-    Outras métricas isoladas (\textit{mutation brittleness}, \textit{test smells}, exposição a \textit{findings}) & 3 & 8\% & \citeonline{ojdanic2023}; \citeonline{grano2019}; \citeonline{petrovic2021} \\
-\end{longtable}
-\endgroup
-
-O \textit{mutation score} é a razão entre os mutantes mortos e os mutantes não equivalentes \cite{chauhan2015, guerino2024}. Um mutante é morto quando algum teste produz resultado diferente do programa original; em suítes \textit{end-to-end} de aplicações web, quando ao menos um caso de teste falha, por uma ação ou por uma verificação (\textit{oracle}) \cite{yandrapally2021}. A métrica aparece com quatro variações. A primeira é o nome: \textit{kill score}, cobertura de mutação ou contagem de mutantes mortos \cite{inozemtseva2013, alenezi2016, dimov2010}. A segunda é o tratamento dos equivalentes: a maioria calcula o escore só sobre os não equivalentes, mas \citeonline{ahmed2016} e \citeonline{ashong2025} não os removem, pois a equivalência é indecidível \cite{yao2014}. A terceira é o recorte por operador ou só sobre mutantes dominadores, que elimina a redundância e evita uma percepção mais favorável da eficácia \cite{kurtz2016, kuroishi2020}. A quarta é o escore estimado sem executar todos os mutantes \cite{jalbert2012, zhang2019}. Há evidência de que o escore é um bom indicador: \citeonline{just2014} encontraram correlação significativa entre a detecção de mutantes e a de falhas reais, mais forte que a da cobertura de comandos.
+O \textit{mutation score} é a razão entre os mutantes mortos e os mutantes não equivalentes \cite{chauhan2015, guerino2024}. Um mutante é morto quando algum teste produz resultado diferente do programa original; em suítes \textit{end-to-end} de aplicações web, quando ao menos um caso de teste falha, por uma ação ou por uma verificação (\textit{oracle}) \cite{yandrapally2021}. A métrica pode aparecer com algumas variações. Uma delas é o nome: \textit{kill score}, cobertura de mutação ou contagem de mutantes mortos \cite{inozemtseva2013, alenezi2016, dimov2010}. Outra é o tratamento dos equivalentes: a maioria calcula o escore só sobre os não equivalentes, mas \citeonline{ahmed2016} e \citeonline{ashong2025} não os removem, pois a equivalência é indecidível \cite{yao2014}. A terceira é o recorte por operador ou só sobre mutantes dominadores, que elimina a redundância e evita uma percepção mais favorável da eficácia \cite{kurtz2016, kuroishi2020}. A quarta é o escore estimado sem executar todos os mutantes \cite{jalbert2012, zhang2019}. Há evidência de que o escore é um bom indicador: \citeonline{just2014} encontraram correlação significativa entre a detecção de mutantes e a de falhas reais, mais forte que a da cobertura de comandos.
 
 A cobertura de código aparece em 9 estudos, sob a lógica de que falhas não são detectadas em código não coberto \cite{zhang2022}, e em sete deles acompanha o \textit{mutation score} como linha de base. Os estudos também mostram seus limites. A cobertura só indica que o código foi executado, e não que seu comportamento foi verificado \cite{petrovic2021}. Uma cobertura de linhas maior não implica suítes melhores: em \citeonline{alenezi2016}, a cobertura de mutação foi de 77\%, 61\% e 43\% em três projetos. \citeonline{ahmed2016} encontraram apenas correlação negativa fraca entre cobertura e correções de \textit{bugs} futuras, e \citeonline{assylbekov2013} reportam correlação de Pearson de 0,66 com o escore em um programa Java.
-
-As demais métricas respondem a perguntas complementares. As contagens de mutantes explicam a sobrevivência: \citeonline{yao2014} mostram que a proporção de equivalentes e de teimosos varia por operador (o ABS gera muitos equivalentes e o LCR, muitos teimosos), e \citeonline{lin2018} usam as taxas de alcance, infecção e propagação. A qualidade da seleção de mutantes (7 estudos) usa o erro relativo do escore \cite{ashong2025} e o escore de mutantes dominadores \cite{kurtz2016}. O custo (6 estudos) é medido pelo tempo de execução, pelo número de mutantes e pela taxa de redução \cite{just2012, arasteh2022}. A validade frente a falhas reais (3 estudos) é medida pelo acoplamento: 70\% dos \textit{bugs} tinham ao menos um mutante acoplado em \citeonline{petrovic2021} e 73\% das falhas em \citeonline{just2014}.
-
-Para aplicações web há uma única referência direta. \citeonline{yandrapally2021} propõem o MAEWU, que aplica 16 operadores ao DOM do navegador, e o avaliam em seis aplicações web de código aberto (\textit{AddressBook}, \textit{Claroline}, \textit{Collabtive}, \textit{MantisBT}, MRBS e PPMA), com suítes JUnit e Selenium. A métrica principal é o \textit{mutation score} sobre os não equivalentes, acrescido da gravidade do \textit{bug} e da teimosia (\textit{stubbornness}), uma escala de 0 a 4 do esforço para matar o mutante. Em 300 mutantes, 93\% eram não equivalentes, o escore médio foi de 0,20, e os mutantes de manipuladores de evento (EHAM, EHDM e EHMM) tiveram escore zero. Os outros estudos próximos tratam de composições WS-BPEL \cite{esterobotaro2010}, de ferramentas para Python \cite{guerino2024} e de código industrial \cite{petrovic2021}.
-
-Em resumo, a literatura mede a eficácia de suítes sobretudo pelo \textit{mutation score} sobre mutantes não equivalentes, com a cobertura como linha de base. Isso sustenta adotá-lo como métrica principal da solução, com a cobertura como referência e a análise dos mutantes sobreviventes como apoio à interpretação.
-
 
 \subsection[Quais operadores são mais utilizadas na literatura?]{Quais operadores de mutação e tipos de alterações artificiais no código-fonte são mais aplicados no contexto específico de aplicações web?}
 \label{subsec:operadores-utilizadas}
@@ -707,37 +650,9 @@ Os 37 estudos somam 147 autorias de 123 autores distintos, com média de 4,1 aut
     \legend{Fonte: Autor (2026).}
 \end{table}
 
-\begin{table}[H]
-    \centering
-    \scriptsize
-    \caption{Grupos de pesquisa, definidos pela coautoria entre os estudos}
-    \label{tab:grupos-pesquisa}
-    \begin{tabular}{|p{2.5cm}|p{2.6cm}|p{3.2cm}|c|p{3.2cm}|}
-        \hline
-        \textbf{Grupo} & \textbf{Autores principais} & \textbf{Afiliações nos artigos} & \textbf{Estudos} & \textbf{Referências} \\
-        \hline
-        Harman, Papadakis e Jia & Harman, Papadakis, Jia, Yao, L. Zhang & University College London (CREST); Athens University of Economics and Business; SnT, University of Luxembourg; Peking University & 7 (19\%) & \cite{yao2014, zhang2019, ojdanic2023, kintis2010, khanfir2023, zhang2010, tao2025} \\
-        \hline
-        Just, Fraser e Holmes & Just, Fraser, Holmes, Inozemtseva, Kapfhammer & Ulm University e Allegheny College (2012); University of Washington, University of Waterloo e University of Sheffield (2014); Google, University of Passau e University of Washington (2021) & 4 (11\%) & \cite{just2012, inozemtseva2013, just2014, petrovic2021} \\
-        \hline
-        Ashong, Laurent e Ventresque & Ashong, Laurent, Ventresque & School of Computer Science and Statistics, Trinity College Dublin, e Lero Research Centre & 3 (8\%) & \cite{ashong2025, ashong2026} \\
-        \hline
-        Arasteh e Gharehchopogh & Arasteh, Gharehchopogh & Istinye University; Islamic Azad University (Urmia Branch) & 3 (8\%) & \cite{shomali2020, arasteh2022, arasteh2023} \\
-        \hline
-        Delamaro, Vincenzi e Kuroishi & Delamaro, Vincenzi, Kuroishi & Universidade de São Paulo (Delamaro, em \citeonline{kurtz2016}); demais afiliações não verificadas & 3 (8\%) & \cite{kurtz2016, kuroishi2020, guerino2024} \\
-        \hline
-        Sem coautoria com outros estudos & -- & -- & 16 (44\%) & \cite{jalbert2012, chauhan2015, nica2011, esterobotaro2010, belli2011, lin2018, zhang2022, dimov2010, grano2019, yandrapally2021, he2024, tufano2020, alenezi2016, assylbekov2013, ahmed2016, guizzo2022} \\
-        \hline
-        \textbf{Total} & \textbf{--} & \textbf{--} & \textbf{37 (100\%)} & \textbf{--} \\
-        \hline
-    \end{tabular}
-    \legend{Fonte: Autor(2026).}
-\end{table}
-
-
 \subsubsection{Autores, grupos de pesquisa e contexto web}
 \label{subsubsec:autores-grupos-web}
 
-Os 37 estudos reúnem 123 autores, dos quais 17 (14\%) aparecem em mais de uma publicação: sete em três estudos (Just, Harman, Papadakis, Arasteh e os três autores de \citeonline{ashong2025, ashong2025b, ashong2026}) e dez em dois, com recorrência longitudinal de nomes como Papadakis (2010--2023) \cite{kintis2010, khanfir2023}, Just (2012--2021) \cite{just2012, petrovic2021}, Harman (2014--2023) \cite{yao2014, ojdanic2023} e Arasteh (2020--2023) \cite{shomali2020, arasteh2023} (Lu Zhang foi unificado pelo nome em \citeonline{zhang2010, zhang2019}). Cinco grupos de coautoria concentram 20 estudos (56\%), enquanto 16 (44\%) vêm de equipes não recorrentes: destacam-se a rede de Harman, Papadakis e Jia (sete estudos, 19\%, incluindo \citeonline{yao2014, zhang2019, kintis2010, ojdanic2023, khanfir2023, zhang2010} e \citeonline{tao2025} via Yao), o grupo de Just, Fraser e Holmes (quatro estudos, 11\% \cite{just2012, inozemtseva2013, just2014, petrovic2021}) e os núcleos de três estudos (8\% cada) liderados por Ashong, Laurent e Ventresque, por Arasteh e Gharehchopogh \cite{shomali2020, arasteh2022, arasteh2023} e por Delamaro, Vincenzi e Kuroishi \cite{kurtz2016, kuroishi2020, guerino2024}. 
+Os 37 estudos reúnem 123 autores, dos quais 17 (14\%) aparecem em mais de uma publicação: sete em três estudos (Just, Harman, Papadakis, Arasteh e os três autores de \citeonline{ashong2025, ashong2025b, ashong2026}) e dez em dois, com recorrência longitudinal de nomes como Papadakis (2010--2023) \cite{kintis2010, khanfir2023}, Just (2012--2021) \cite{just2012, petrovic2021}, Harman (2014--2023) \cite{yao2014, ojdanic2023} e Arasteh (2020--2023) \cite{shomali2020, arasteh2023} (Lu Zhang foi unificado pelo nome em \citeonline{zhang2010, zhang2019}).
 
-Os três estudos em contexto web pertencem a equipes isoladas, sem autores recorrentes nem vínculo com os cinco grupos (como \citeonline{yandrapally2021}, na University of British Columbia, e \citeonline{esterobotaro2010}, na University of Cádiz; afiliações de \citeonline{belli2011} não verificadas). Assim, a concentração é moderada, os grupos recorrentes servem de referência para fundamentar e comparar achados, e a ausência de linhas contínuas na web reforça a relevância da investigação empírica proposta, considerando que os agrupamentos baseiam-se apenas na coautoria e nas afiliações reportadas no corpus.
+Os três estudos em contexto web pertencem a equipes isoladas, sem autores recorrentes nem vínculo com os cinco grupos (como \citeonline{yandrapally2021}, na University of British Columbia, e \citeonline{esterobotaro2010}, na University of Cádiz; afiliações de \citeonline{belli2011} não verificadas). Assim, a concentração é moderada, os grupos recorrentes servem de referência para fundamentar e comparar achados, e a ausência de linhas contínuas na web reforça a relevância da investigação empírica proposta.
