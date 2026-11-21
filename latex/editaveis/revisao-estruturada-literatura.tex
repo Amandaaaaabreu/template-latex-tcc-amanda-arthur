@@ -144,74 +144,13 @@ A cobertura de código aparece em 9 estudos, sob a lógica de que falhas não s�
 \subsection[Quais operadores são mais utilizadas na literatura?]{Quais operadores de mutação e tipos de alterações artificiais no código-fonte são mais aplicados no contexto específico de aplicações web?}
 \label{subsec:operadores-utilizadas}
 
-Os operadores mais aplicados são os tradicionais, que alteram o código-fonte no nível de instruções e expressões. A maioria dos estudos (28 de 37) descreve os operadores ou o conjunto de operadores utilizado, e as famílias mais frequentes são a substituição de operadores relacionais, como o ROR (16 estudos, 44\%), a substituição de operadores aritméticos, como o AOR (15 estudos, 42\%), a substituição de operadores lógicos e condicionais, como o LCR e o COR (14 estudos, 39\%) e a remoção de instruções, blocos e chamadas de método, como o SDL e o SBR (14 estudos, 39\%). Em seguida aparecem os operadores unitários e de valor absoluto, como UOI e ABS, e a alteração de constantes, ambos com 11 estudos (31\%). Essas famílias coincidem com o conjunto seletivo clássico de cinco classes (ABS, AOR, LCR, ROR e UOI) avaliado por \citeonline{yao2014} e com os cinco operadores (AOR, LCR, ROR, UOI e SBR) do sistema de mutação do Google \cite{petrovic2021}.
+Os operadores mais aplicados são os tradicionais, que alteram o código-fonte no nível de instruções e expressões. A maioria dos estudos (28 de 37) descreve os operadores usados. As famílias mais frequentes são a substituição de operadores relacionais, como o ROR (16 estudos, 44\%), de operadores aritméticos, como o AOR (15, 42\%), de operadores lógicos e condicionais, como o LCR e o COR (14, 39\%), e a remoção de instruções, blocos e chamadas de método, como o SDL e o SBR (14, 39\%). Em seguida estão os operadores unários e de valor absoluto, como UOI e ABS, e a alteração de constantes (11 estudos cada, 31\%), a alteração de retornos e de referências nulas (9, 25\%), a substituição de variáveis (6, 17\%) e os operadores de deslocamento e \textit{bit} a \textit{bit} (5, 14\%). Essas famílias coincidem com o conjunto seletivo clássico de cinco classes (ABS, AOR, LCR, ROR e UOI) de \citeonline{yao2014} e com os cinco operadores do sistema do Google (AOR, LCR, ROR, UOI e SBR) \cite{petrovic2021}. Os conjuntos aplicados vêm das ferramentas: o PIT oferece mutadores como \textit{Conditionals Boundary}, \textit{Negate Conditionals}, \textit{Math} e \textit{Return Values} \cite{assylbekov2013, zhang2022}, e as ferramentas para Python trazem categorias de atribuição, aritméticos, unários, relacionais, condicionais e de \textit{bits} \cite{guerino2024}.
 
-Para aplicações web, apenas um estudo propõe operadores específicos: o MAEWU, com 16 operadores que alteram o DOM da página, e não o código-fonte \cite{yandrapally2021}. A Tabela~\ref{tab:familias-operadores} resume as famílias de alteração encontradas.
+Nem todo operador se comporta da mesma forma. O COR e o ROR geram 41\% dos mutantes em \citeonline{just2012}, e redefinir o COR sem redundância reduziu em até 34\% o tempo da análise. \citeonline{yao2014} mostram que o ABS e metade do UOI geram muitos equivalentes e quase nenhum teimoso, enquanto o LCR gera muitos teimosos. No Google, o SBR gerou a maioria dos mutantes acoplados a falhas reais \cite{petrovic2021}. Cinco estudos usam operadores de domínio, como os de classe do MuJava \cite{chauhan2015, nica2011}, 26 para composições WS-BPEL \cite{esterobotaro2010} e os específicos de Python \cite{guerino2024}, além dos de DOM do MAEWU. Três estudos mudam a forma de gerar os mutantes: mutação de segunda ordem \cite{kintis2010}, tradução neural \cite{tufano2020} e injeção guiada por relatos de \textit{bugs} \cite{khanfir2023}.
 
-\begingroup
-\footnotesize
-\setlength{\tabcolsep}{4pt} % Ajusta o espaçamento interno lateral das células
-\begin{longtable}{|p{0.20\textwidth}|p{0.18\textwidth}|>{\centering\arraybackslash}p{0.08\textwidth}|>{\centering\arraybackslash}p{0.06\textwidth}|p{0.40\textwidth}|}
-    \caption{Famílias de operadores e tipos de alterações}
-    \label{tab:familias-operadores} \\
-    
-    % --- Cabeçalho da PRIMEIRA página ---
-    \hline
-    \textbf{Família de alteração} & \textbf{Exemplos de operadores} & \textbf{Estudos} & \textbf{\%} & \textbf{Referências} \\
-    \hline
-    \endfirsthead
-
-    % --- Cabeçalho das PÁGINAS SEGUINTES ---
-    \multicolumn{5}{c}{\footnotesize\textit{Continuação da Tabela~\ref{tab:familias-operadores}}} \\
-    \hline
-    \textbf{Família de alteração} & \textbf{Exemplos de operadores} & \textbf{Estudos} & \textbf{\%} & \textbf{Referências} \\
-    \hline
-    \endhead
-
-    % --- Rodapé intermediário ---
-    \hline
-    \endfoot
-
-    % --- Rodapé FINAL ---
-    \hline
-    \multicolumn{5}{c}{\footnotesize Fonte: Autor (2026).} \\
-    \endlastfoot
-
-    % --- Conteúdo da tabela ---
-    Substituição de operadores relacionais e de condições & ROR, Conditionals Boundary, Negate Conditionals & 16 & 44\% & \citeonline{just2012}; \citeonline{jalbert2012}; \citeonline{ojdanic2023}; \citeonline{belli2011}; \citeonline{tao2025}; \citeonline{petrovic2021}; \citeonline{zhang2022}; \citeonline{arasteh2023}; \citeonline{ashong2025a}; \citeonline{he2024}; \citeonline{kurtz2016}; \citeonline{just2014}; \citeonline{yao2014}; \citeonline{assylbekov2013}; \citeonline{ashong2025b}; \citeonline{inozemtseva2013} \\
-    \hline
-    Substituição de operadores aritméticos & AOR, AOR-B, AOR-S, AOR-U, Math, Increments & 15 & 42\% & \citeonline{jalbert2012}; \citeonline{esterobotaro2010}; \citeonline{belli2011}; \citeonline{guerino2024}; \citeonline{tao2025}; \citeonline{petrovic2021}; \citeonline{zhang2022}; \citeonline{arasteh2023}; \citeonline{ashong2025a}; \citeonline{he2024}; \citeonline{kurtz2016}; \citeonline{just2014}; \citeonline{yao2014}; \citeonline{assylbekov2013}; \citeonline{ashong2025b} \\
-    \hline
-    Substituição de operadores lógicos e condicionais & LCR, COR, LOR, COD, COI & 14 & 39\% & \citeonline{just2012}; \citeonline{esterobotaro2010}; \citeonline{belli2011}; \citeonline{guerino2024}; \citeonline{tao2025}; \citeonline{petrovic2021}; \citeonline{dimov2010}; \citeonline{arasteh2023}; \citeonline{ashong2025a}; \citeonline{he2024}; \citeonline{kurtz2016}; \citeonline{yao2014}; \citeonline{ashong2025b}; \citeonline{khanfir2023} \\
-    \hline
-    Remoção de instruções, blocos e chamadas de método & SDL, SBR, Remove Call, Void Method Call, RM & 14 & 39\% & \citeonline{jalbert2012}; \citeonline{chauhan2015}; \citeonline{ojdanic2023}; \citeonline{tao2025}; \citeonline{petrovic2021}; \citeonline{zhang2022}; \citeonline{ashong2025a}; \citeonline{he2024}; \citeonline{kurtz2016}; \citeonline{just2014}; \citeonline{assylbekov2013}; \citeonline{ashong2025b}; \citeonline{khanfir2023}; \citeonline{inozemtseva2013} \\
-    \hline
-    Inserção, remoção e substituição de operadores unários e valor absoluto & UOI, ABS, AOI, AOD, Invert Negatives & 11 & 31\% & \citeonline{jalbert2012}; \citeonline{ojdanic2023}; \citeonline{esterobotaro2010}; \citeonline{guerino2024}; \citeonline{tao2025}; \citeonline{petrovic2021}; \citeonline{zhang2022}; \citeonline{arasteh2023}; \citeonline{he2024}; \citeonline{yao2014}; \citeonline{assylbekov2013} \\
-    \hline
-    Substituição ou modificação de constantes e literais & CRP, Inline Constant, SRC & 11 & 31\% & \citeonline{jalbert2012}; \citeonline{chauhan2015}; \citeonline{ojdanic2023}; \citeonline{esterobotaro2010}; \citeonline{tao2025}; \citeonline{zhang2022}; \citeonline{he2024}; \citeonline{just2014}; \citeonline{assylbekov2013}; \citeonline{khanfir2023}; \citeonline{inozemtseva2013} \\
-    \hline
-    Alteração de retornos e de referências nulas & RSR, Return Values, NRV, NIV, NOI, RNC & 9 & 25\% & \citeonline{chauhan2015}; \citeonline{ojdanic2023}; \citeonline{tao2025}; \citeonline{zhang2022}; \citeonline{ashong2025a}; \citeonline{he2024}; \citeonline{assylbekov2013}; \citeonline{ashong2025b}; \citeonline{khanfir2023} \\
-    \hline
-    Substituição de variáveis & SVR, ISV, CSR & 6 & 17\% & \citeonline{jalbert2012}; \citeonline{chauhan2015}; \citeonline{esterobotaro2010}; \citeonline{tao2025}; \citeonline{he2024}; \citeonline{khanfir2023} \\
-    \hline
-    Operadores de deslocamento, de atribuição de atalho e bit a bit & SOR, SAOR & 5 & 14\% & \citeonline{guerino2024}; \citeonline{arasteh2023}; \citeonline{ashong2025a}; \citeonline{ashong2025b}; \citeonline{khanfir2023} \\
-    \hline
-    Operadores específicos de classe ou de domínio & Operadores de classe do MuJava, WS-BPEL, Python, DOM web (MAEWU) & 5 & 14\% & \citeonline{chauhan2015}; \citeonline{nica2011}; \citeonline{esterobotaro2010}; \citeonline{guerino2024}; \citeonline{yandrapally2021} \\
-    \hline
-    Geração alternativa (ordem superior, neural, baseada em \textit{bug reports}) & Mutação de segunda ordem, DeepMutation, iBiR & 3 & 8\% & \citeonline{kintis2010}; \citeonline{tufano2020}; \citeonline{khanfir2023} \\
-\end{longtable}
-\endgroup
-
-Os operadores tradicionais se repetem entre ferramentas e linguagens. Os de expressões trocam um operador por outro do mesmo tipo (ROR, AOR, LCR e COR), como \texttt{\&\&} por \texttt{||} ou \texttt{>=} por \texttt{<=} \cite{belli2011}. Os de valores alteram constantes, inserem operador unário (UOI) ou valor absoluto (ABS) e substituem variáveis \cite{chauhan2015, yao2014}. Os de instruções removem código, como instruções (SDL), blocos (SBR) e chamadas de método, ou substituem o retorno \cite{jalbert2012, petrovic2021}. Os conjuntos aplicados vêm das ferramentas: o PIT oferece mutadores como \textit{Conditionals Boundary}, \textit{Negate Conditionals}, \textit{Math} e \textit{Return Values} \cite{assylbekov2013, zhang2022}; o Major, usado por \citeonline{just2014}, reúne a substituição de constantes e de operadores, a modificação de condições e a remoção de instruções; o LittleDarwin tem 14 operadores \cite{ashong2025a}; o Proteum implementa 108 operadores para C \cite{zhang2010}; e as ferramentas para Python trazem categorias de atribuição, aritméticos, unários, relacionais, condicionais e de \textit{bits} \cite{guerino2024}.
-
-Nem todo operador se comporta da mesma forma. O COR e o ROR geram 41\% dos mutantes em \citeonline{just2012}, que redefiniram o COR sem redundância e reduziram em até 34\% o tempo da análise. No Google, o SBR gerou a maioria dos mutantes acoplados a falhas reais \cite{petrovic2021}. \citeonline{yao2014} mostram que o ABS e metade do UOI geram muitos equivalentes e quase nenhum teimoso, enquanto o LCR gera muitos teimosos.
-
-Alguns estudos adaptam as alterações ao domínio ou mudam a forma de gerar os mutantes: operadores de classe do MuJava \cite{chauhan2015, nica2011}; 26 operadores para composições WS-BPEL, dos quais oito não foram aplicáveis às três composições avaliadas \cite{esterobotaro2010}; operadores específicos de Python, como alterações em decoradores \cite{guerino2024}; mutação de segunda ordem e mutação fraca \cite{kintis2010}; tradução neural, no DeepMutation \cite{tufano2020}; e injeção guiada por relatos de \textit{bugs}, no iBiR \cite{khanfir2023}.
-
-Para aplicações \textit{web}, só um estudo propõe operadores próprios. \citeonline{yandrapally2021} observam que as ferramentas de mutação para a \textit{web} são ligadas a linguagens ou \textit{frameworks} específicos, como o \textit{WebMuJava}, que não é público, e o \textit{AjaxMutator}. O MAEWU altera o DOM dinâmico no navegador, sem acesso ao código-fonte, com 16 operadores derivados da análise de 250 relatos de \textit{bugs} e organizados em atributos, manipuladores de evento, árvore DOM, conteúdo e estilo. Dos 300 mutantes avaliados, 22 eram equivalentes (7 do SCM, cuja cor foi sobrescrita por uma regra CSS, e 5 do AAM), e os de manipuladores de evento foram os mais teimosos, com escore zero, pois matá-los exige executar a ação e verificar o resultado.
+Para aplicações \textit{web}, só um estudo propõe operadores próprios. O MAEWU altera o DOM no navegador, sem acesso ao código-fonte, com 16 operadores derivados de 250 relatos de \textit{bugs} e organizados em atributos, manipuladores de evento, árvore DOM, conteúdo e estilo. As ferramentas anteriores, como o \textit{WebMuJava}, que não é público, e o \textit{AjaxMutator}, são ligadas a linguagens ou \textit{frameworks} específicos. Dos 300 mutantes avaliados, 22 eram equivalentes, e os de manipuladores de evento foram os mais teimosos, com escore zero, pois matá-los exige executar a ação e verificar o resultado \cite{yandrapally2021}.
 
 Em resumo, a literatura aplica sobretudo operadores tradicionais, como ROR, AOR, LCR e SDL, em programas Java, C e Python, e nenhum estudo da revisão os avaliou em suítes de interface \textit{web}. Para esse contexto, a única evidência usa operadores de DOM, que exigem uma suíte de interface. Esses resultados sustentam usar, na solução proposta, os operadores tradicionais, que são os mais frequentes, e deixar os operadores de DOM fora do escopo.
-
 
 \subsection[Quais ferramentas são mais utilizadas na literatura?]{Quais ferramentas automatizadas de teste de mutação para tecnologias web são reportadas nos estudos primários e qual o seu nível de maturidade?}
 \label{subsec:ferramentas-utilizadas}
@@ -324,153 +263,45 @@ Em síntese, a maturidade das ferramentas diminui à medida que se afasta de Jav
 \subsection[Principais limitações e desafios práticos]{Quais são as principais limitações e desafios práticos identificados na aplicação de testes de mutação em aplicações web?}
 \label{subsec:limitacoes-desafios}
 
-Dos 37 estudos com dados extraídos, 33 relatam ao menos uma limitação ou desafio na aplicação do teste de mutação. Como somente quatro tratam de tecnologias web \cite{yandrapally2021, esterobotaro2010, nica2011, belli2011}, a maior parte das limitações vem de estudos sobre Java, C e Python. Elas são apresentadas aqui porque valem também para o contexto web, em especial o custo de execução e os mutantes equivalentes. Os desafios foram agrupados em seis temas (Tabela~\ref{tab:desafios-limitacoes}), e um mesmo estudo pode aparecer em mais de um deles. Os dois mais frequentes são o custo computacional, relatado em 22 estudos, e os mutantes equivalentes, em 20.
+Dos 37 estudos com dados extraídos, 33 relatam ao menos uma limitação ou desafio na aplicação do teste de mutação. Como somente quatro tratam de tecnologias \textit{web} \cite{yandrapally2021, esterobotaro2010, nica2011, belli2011}, a maior parte vem de estudos sobre Java, C e Python, mas vale também para a \textit{web}, em especial o custo de execução e os mutantes equivalentes. Os desafios foram agrupados em seis temas, e um mesmo estudo pode aparecer em mais de um: especificidades de tecnologias \textit{web}, custo computacional, mutantes equivalentes, mutantes redundantes, representatividade dos mutantes e das métricas, e limitações das ferramentas e da adoção. Os dois mais frequentes são o custo computacional, em 22 estudos, e os mutantes equivalentes, em 20.
 
-\begingroup
-\footnotesize
-\setlength{\tabcolsep}{4pt} % Ajusta o espaçamento interno lateral das células
-\begin{longtable}{|p{2.2cm}|p{2.3cm}|p{3.2cm}|p{3.3cm}|}
-    \caption{Principais limitações e desafios reportados nos estudos primários e estratégias de mitigação}
-    \label{tab:desafios-limitacoes} \\
-    
-    % --- Cabeçalho da PRIMEIRA página ---
-    \hline
-    \textbf{Tema} & \textbf{Estudos (exemplos)} & \textbf{Limitação ou desafio} & \textbf{Estratégias reportadas} \\ 
-    \hline
-    \endfirsthead
+Para a \textit{web}, \citeonline{yandrapally2021} apontam os dados dinâmicos, como valores de \textit{id} gerados em tempo de execução, cujos mutantes se parecem com equivalentes (22 dos 300 mutantes eram equivalentes, 7 do SCM e 5 do AAM); a fragilidade dos localizadores de elementos, que encarece a manutenção das suítes \textit{end-to-end}; um modelo de severidade que subestima os mutantes de estilo; e a amostra de seis aplicações, com rótulos atribuídos pelo primeiro autor. Em WS-BPEL, os serviços reais não estavam disponíveis, os \textit{mockups} aumentam os mutantes potencialmente equivalentes e a implantação de cada mutante é demorada \cite{esterobotaro2010}. Em EJB, cada alteração exige nova implantação no servidor, e o experimento foi encerrado pelo volume de tempo e de recursos \cite{nica2011}. \citeonline{belli2011} apontam sobreviventes que exigem estados específicos do sistema e a aplicabilidade dos operadores ao PHP.
 
-    % --- Cabeçalho das PÁGINAS SEGUINTES ---
-    \multicolumn{4}{c}{\footnotesize\textit{Continuação da Tabela~\ref{tab:desafios-limitacoes}}} \\
-    \hline
-    \textbf{Tema} & \textbf{Estudos (exemplos)} & \textbf{Limitação ou desafio} & \textbf{Estratégias reportadas} \\ 
-    \hline
-    \endhead
+O custo é a limitação mais citada (22 estudos). \citeonline{petrovic2021} consideram inviável avaliar todos os mutantes na escala do Google, onde a análise de acoplamento envolveu quase 400 mil mutantes e mais de 33 milhões de execuções de testes. \citeonline{kintis2010} estimam o número de mutantes candidatos na ordem do quadrado do número de linhas do programa, e \citeonline{guizzo2022} observam que reduzir os mutantes não reduz o tempo na mesma proporção. O custo também limitou a 15 o número de projetos de \citeonline{ashong2025a}.
 
-    % --- Rodapé intermediário ---
-    \hline
-    \endfoot
+Os mutantes equivalentes (20 estudos) são um problema indecidível. \citeonline{yao2014} gastaram seis meses-pessoa para classificá-los em 1.230 mutantes de 18 programas, e \citeonline{he2024} indicam que costumam ser de 10\% a 40\% dos gerados. Muitos estudos assumem o risco: \citeonline{ahmed2016} não os removeram, \citeonline{ashong2025a} tratam todos os sobreviventes como matáveis, e \citeonline{guerino2024} observam que as ferramentas Python não os marcam e adotam revisão manual por um segundo avaliador. Os mutantes redundantes, mortos pelos mesmos testes, também distorcem o escore \cite{ashong2026, kurtz2016}.
 
-    % --- Rodapé FINAL ---
-    \hline
-    \multicolumn{4}{c}{\footnotesize Fonte: Autor (2026).} \\
-    \endlastfoot
-
-    % --- Conteúdo da tabela ---
-    Especificidades de tecnologias web & \citeonline{yandrapally2021, esterobotaro2010, nica2011, belli2011} & Dados dinâmicos, fragilidade de localizadores, severidade de mutantes de estilo, serviços web indisponíveis, reimplantação a cada mutante & Mutação do DOM dinâmico, mockups de serviços, automação da reimplantação \\ 
-    \hline
-    Custo computacional & \citeonline{just2012, nica2011, petrovic2021, grano2019, guizzo2022} & Grande número de mutantes e de execuções de testes & Seleção de operadores, amostragem, mutação fraca, mutação de ordem superior, mutação apenas do código alterado, previsão do escore \\ 
-    \hline
-    Mutantes equivalentes & \citeonline{yao2014, he2024, ahmed2016, zhang2019} & Problema indecidível, com análise manual custosa e sujeita a erro & Revisão manual por mais de um avaliador, \textit{solver} de restrições, cálculo do escore sobre mutantes não equivalentes \\ 
-    \hline
-    Mutantes redundantes & \citeonline{ashong2026, kurtz2016, kuroishi2020, just2012} & Mutantes mortos pelos mesmos testes inflam o conjunto e distorcem o escore & Subsunção, mutantes dominadores, arcos primitivos \\ 
-    \hline
-    Representatividade dos mutantes e das métricas & \citeonline{just2014, tufano2020, khanfir2023, ashong2026} & Falhas reais sem mutante acoplado; mutantes pouco realistas; escore isolado & Novos operadores, mutação guiada por relatos de \textit{bugs}, seleção por histórico de defeitos \\ 
-    \hline
-    Ferramentas, adoção e validade dos estudos & \citeonline{ramler2012, petrovic2021, tufano2020, assylbekov2013} & Falhas das ferramentas, esforço de configuração, sobrecarga dos desenvolvedores, amostras pequenas & Regras de supressão, limite de mutantes por arquivo, \textit{corpora} variados e múltiplas repetições \\ 
-\end{longtable}
-\endgroup
-
-Para a \textit{web}, \citeonline{yandrapally2021} apontam os dados dinâmicos, como valores de \textit{id} gerados em tempo de execução, cujos mutantes se parecem com equivalentes: dos 300 mutantes, 22 eram equivalentes, 7 do operador SCM (a cor era sobrescrita por uma regra CSS) e 5 do AAM (atributos não usados pelo JavaScript). Também citam a fragilidade dos localizadores de elementos \textit{web}, que encarece a manutenção das suítes \textit{end-to-end}, um modelo de severidade que trata o CSS como cosmético e subestima os mutantes de estilo, e a amostra limitada a seis aplicações, com rótulos atribuídos manualmente pelo primeiro autor. Para serviços e componentes \textit{web}, os desafios são de infraestrutura. Em WS-BPEL, os serviços reais não estavam disponíveis, os \textit{mockups} aumentam os mutantes potencialmente equivalentes e a implantação de cada mutante, com \textit{timeouts}, é demorada \cite{esterobotaro2010}. Em EJB, cada alteração exige nova implantação no servidor, e o experimento foi encerrado pelo volume de tempo e de recursos \cite{nica2011}. \citeonline{belli2011} apontam sobreviventes que exigem estados específicos do sistema e a aplicabilidade dos operadores ao PHP.
-
-O custo é a limitação mais citada (22 estudos). \citeonline{petrovic2021} consideram inviável avaliar todos os mutantes na escala do Google, onde a análise de acoplamento envolveu quase 400 mil mutantes e mais de 33 milhões de execuções de testes. \citeonline{grano2019} o descreve como extremo, e \citeonline{arasteh2022, arasteh2023} o tratam como problema estrutural da técnica. \citeonline{kintis2010} estimam o número de mutantes candidatos na ordem do quadrado do número de linhas do programa, e \citeonline{guizzo2022} observam que reduzir os mutantes não reduz o tempo na mesma proporção. O custo também limitou a 15 o número de projetos de \citeonline{ashong2025a}.
-
-Os mutantes equivalentes (20 estudos) são um problema indecidível. \citeonline{yao2014} gastaram seis meses-pessoa para classificá-los manualmente em 1.230 mutantes de 18 programas, e \citeonline{he2024} indicam que eles costumam ser de 10\% a 40\% dos mutantes gerados. Muitos estudos assumem o risco: \citeonline{ahmed2016} não os removeram, \citeonline{ashong2025a} tratam todos os sobreviventes como matáveis, e \citeonline{guerino2024} observam que as ferramentas Python não os marcam e adotam revisão manual por um segundo avaliador. Os mutantes redundantes, mortos pelos mesmos testes, também inflam o conjunto e distorcem o escore \cite{ashong2026, kurtz2016}.
-
-Os mutantes podem não representar as falhas reais: \citeonline{just2014} mostram que 27\% das falhas reais não têm mutante acoplado entre os gerados por operadores comuns e 17\% não têm de nenhum tipo, e \citeonline{kurtz2016} concluem que uma seleção de operadores eficaz em um programa tende a ter desempenho ruim em outro. O \textit{mutation score} isolado também não capta a diversidade dos mutantes \cite{ashong2026}. Há ainda limitações das ferramentas e da adoção: 10\% das execuções de cinco ferramentas Java não produziram escore válido \cite{ramler2012}, apenas de 35\% a 67\% dos projetos mutados pelo DeepMutation compilaram \cite{tufano2020}, e o Google precisou mutar só o código alterado e coberto, aplicar regras de supressão e relatar no máximo sete mutantes por arquivo \cite{petrovic2021}. Por fim, vários estudos usam amostras pequenas, como programas de até 260 linhas \cite{assylbekov2013} ou a suíte \textit{Siemens} \cite{kurtz2016}, e as mitigam com \textit{corpora} de tamanhos e domínios variados, repetições e disponibilização pública de ferramentas e dados.
+Os mutantes podem não representar as falhas reais: 27\% das falhas reais não têm mutante acoplado entre os gerados por operadores comuns e 17\% não têm de nenhum tipo \cite{just2014}, uma seleção de operadores eficaz em um programa tende a ter desempenho ruim em outro \cite{kurtz2016} e o \textit{mutation score} isolado não capta a diversidade dos mutantes \cite{ashong2026}. Há ainda limitações das ferramentas e da adoção: 10\% das execuções de cinco ferramentas Java não produziram escore válido \cite{ramler2012}, só de 35\% a 67\% dos projetos mutados pelo DeepMutation compilaram \cite{tufano2020}, e o Google precisou mutar só o código alterado e coberto, aplicar regras de supressão e relatar no máximo sete mutantes por arquivo \cite{petrovic2021}. Por fim, vários estudos usam amostras pequenas, como programas de até 260 linhas \cite{assylbekov2013}, e as mitigam com \textit{corpora} variados, repetições e disponibilização pública de ferramentas e dados.
 
 Em síntese, o custo de execução e os mutantes equivalentes são limitações quase universais e serão enfrentados em qualquer aplicação \textit{web}. Para a \textit{web}, os estudos acrescentam dados dinâmicos, localizadores frágeis, reimplantação a cada mutante, dependência de serviços externos e ferramentas inaplicáveis, mas apoiados em apenas quatro estudos e em amostras reduzidas. Esses resultados sustentam limitar o número de mutantes por aplicação, como faz o MAEWU com 50, priorizar o código coberto ou alterado, tratar os equivalentes com revisão manual por mais de um avaliador e reportar o \textit{mutation score} junto de métricas complementares.
 
 \subsection[Estratégias para reduzir os custos]{Quais estratégias são propostas na literatura para reduzir os custos e mitigar as limitações da aplicação de testes de mutação em aplicações web?}
 \label{subsec:estrategias-reducao}
 
-Dos 37 estudos com dados extraídos, 31 propõem ou avaliam ao menos uma estratégia para reduzir o custo ou mitigar limitações do teste de mutação. Quase todas foram desenvolvidas e avaliadas em programas Java, C ou Python, e só quatro estudos tratam de tecnologias web: o MAEWU \cite{yandrapally2021}, os compostos WS-BPEL \cite{esterobotaro2010}, os componentes EJB \cite{nica2011} e o código PHP \cite{belli2011}. Por isso, o tópico apresenta primeiro as estratégias feitas para a web e, depois, as demais, indicando o que cada uma poderia oferecer a aplicações web. \citeonline{grano2019} lembra que Offutt e Untch classificam as técnicas de aceleração do teste de mutação em três grupos: fazer menos (\textit{do fewer}), fazer de forma mais inteligente (\textit{do smarter}) e fazer mais rápido (\textit{do faster}). A maioria das estratégias encontradas se enquadra no primeiro grupo, ao reduzir o número de mutantes (Tabela~\ref{tab:estrategias-reducao}).
+Dos 37 estudos com dados extraídos, 31 propõem ou avaliam ao menos uma estratégia para reduzir o custo ou mitigar limitações do teste de mutação. Quase todas foram desenvolvidas e avaliadas em programas Java, C ou Python, e só quatro estudos tratam de tecnologias \textit{web} (MAEWU, WS-BPEL, EJB e PHP). Por isso, o tópico apresenta primeiro as estratégias feitas para a \textit{web} e depois as demais, indicando o que poderiam oferecer a aplicações \textit{web}. \citeonline{grano2019} lembra que Offutt e Untch classificam as técnicas de aceleração em três grupos: fazer menos (\textit{do fewer}), de forma mais inteligente (\textit{do smarter}) e mais rápido (\textit{do faster}). A maioria das estratégias encontradas está no primeiro grupo, ao reduzir o número de mutantes.
 
-\begin{table}[H]
-    \centering
-    \footnotesize
-    \caption{Estratégias para reduzir custos e mitigar limitações}
-    \label{tab:estrategias-reducao}
-    \begin{tabular}{|p{3.1cm}|p{3.8cm}|p{4.6cm}|p{2.5cm}|}
-        \hline
-        \textbf{Estratégia} & \textbf{Estudos (exemplos)} & \textbf{Resultado ou evidência reportada} & \textbf{Uso em web} \\
-        \hline
-        Seleção por importância, com mutantes espalhados (MAEWU) & \citeonline{yandrapally2021} & Limite de 50 mutantes por aplicação, escolhidos por características estáticas e dinâmicas dos elementos web & Avaliada em seis aplicações web \\
-        \hline
-        Infraestrutura e testes para serviços e componentes web & \citeonline{esterobotaro2010}; \citeonline{nica2011} & \textit{Mockups} de serviços, suíte mínima (28 para 7 testes), reimplantação automatizada, mutação só dos métodos de negócio & WS-BPEL e EJB \\
-        \hline
-        Seleção de operadores e remoção de operadores redundantes & \citeonline{zhang2010}; \citeonline{kurtz2016}; \citeonline{yao2014}; \citeonline{just2012} & Seleção de operadores não superou a aleatória; remoção de redundantes reduziu até 34\% do tempo & Não avaliada \\
-        \hline
-        Amostragem e seleção estática de mutantes & \citeonline{ashong2025, ashong2026}; \citeonline{inozemtseva2013} & Nenhuma técnica é a melhor em todos os casos; as estratificadas se destacam & Não avaliada \\
-        \hline
-        Mutação em caminhos propensos a falhas & \citeonline{arasteh2022, arasteh2023}; \citeonline{shomali2020} & Redução de 28,10\% e de 27,63\% dos mutantes & Não avaliada \\
-        \hline
-        Mutantes dominadores, subsunção e arcos primitivos & \citeonline{kurtz2016}; \citeonline{kuroishi2020}; \citeonline{ojdanic2023} & Redução da redundância e do ruído no escore & Não avaliada \\
-        \hline
-        Mutação de ordem superior e mutação fraca & \citeonline{kintis2010}; \citeonline{tao2025} & 96\% a 98\% da cobertura de mutação forte, com menos equivalentes & Não avaliada \\
-        \hline
-        Previsão do escore sem executar os mutantes & \citeonline{jalbert2012}; \citeonline{zhang2019}; \citeonline{zhang2022}; \citeonline{grano2019} & Modelos supervisionados e abordagem não supervisionada baseada em cobertura & Não avaliada \\
-        \hline
-        Mutação orientada a mudanças e a regras de contexto & \citeonline{petrovic2021}; \citeonline{ojdanic2023} & Aplicada em produção no Google, com suporte a JavaScript, TypeScript e Dart & Parcial (linguagens web) \\
-        \hline
-        Mutantes realistas e direcionados & \citeonline{tufano2020}; \citeonline{khanfir2023}; \citeonline{just2014}; \citeonline{guizzo2022} & iBiR gera falhas acopladas a falhas reais em cerca de 37\% dos casos, contra menos de 4\% da mutação tradicional & Não avaliada \\
-        \hline
-        Tratamento de mutantes equivalentes & \citeonline{nica2011}; \citeonline{guerino2024}; \citeonline{yao2014}; \citeonline{he2024} & Revisão manual, \textit{solver} de restrições, modelos de geração de testes por LLM & Não avaliada \\
-        \hline
-    \end{tabular}
-    \legend{Fonte: Autor (2026).}
-\end{table}
+A estratégia mais relevante é a do MAEWU, que trata o custo de mutar páginas pesadas: uma página média tem cerca de 2~MB e mais de 600 elementos de 32 tipos, e sem uma noção de importância o número de mutantes se torna ingerenciável. A seleção é aleatória, enviesada e espalhada: a chance de escolher um mutante depende de uma pontuação que soma características estáticas do elemento (ser folha, ter texto, ser interativo e estar visível) e dinâmicas, do traço de execução, e que cai quando já há mutantes no mesmo elemento. O limite foi de 50 mutantes por aplicação, em seis aplicações \cite{yandrapally2021}. Para serviços e componentes \textit{web}, \citeonline{esterobotaro2010} usam \textit{mockups} e suítes mínimas e não redundantes (28 para 7 testes em uma composição), e \citeonline{nica2011} propõe mutar só os métodos de negócio que interferem na comunicação entre cliente e servidor e automatizar a reimplantação. Ambas foram avaliadas em pequena escala e dependem da tecnologia.
 
-A estratégia mais relevante para este trabalho é a do MAEWU, que trata o custo de mutar páginas \textit{web} pesadas: uma página média tem cerca de 2~MB e mais de 600 elementos de 32 tipos, e sem uma noção de importância o número de mutantes se torna ingerenciável \cite{yandrapally2021}. A seleção é aleatória, enviesada e espalhada: a chance de escolher um mutante depende de uma pontuação que soma características estáticas do elemento (ser folha, ter texto, ser interativo e estar visível) e dinâmicas, do traço de execução (acessos pelos testes e pelo JavaScript), e que cai quando já há mutantes no mesmo elemento. O limite foi de 50 mutantes por aplicação. Para serviços e componentes \textit{web}, \citeonline{esterobotaro2010} usam \textit{mockups} e suítes mínimas e não redundantes (28 para 7 testes em uma composição), e \citeonline{nica2011} propõe mutar só os métodos de negócio que interferem na comunicação entre cliente e servidor e automatizar a reimplantação. Todas foram avaliadas em pequena escala e dependem da tecnologia.
+Para reduzir o número de mutantes, a seleção de operadores é a mais tradicional, mas não supera a aleatória \cite{zhang2010} e tem desempenho ruim em ao menos alguns programas \cite{kurtz2016}; redefinir o COR e o ROR, que criam 41\% dos mutantes, reduz o tempo em até 34\% \cite{just2012}. A amostragem e a seleção estática são mais gerais: \citeonline{ashong2025a} comparam dez técnicas em 15 projetos Java e concluem que nenhuma é a melhor em todos os casos, mas que as de estratificação superam as demais em até 129 dos 135 cenários, e a estratificação pelo arquivo de origem deu a melhor aproximação do escore em até 68. Outras linhas concentram a mutação em caminhos propensos a falhas, com reduções de 28,10\% e de 27,63\% dos mutantes \cite{arasteh2022, arasteh2023}, eliminam a redundância com mutantes dominadores e subsunção \cite{kurtz2016, ojdanic2023} ou usam mutação de ordem superior e mutação fraca, que atingem de 96\% a 98\% da cobertura de mutação forte com menos equivalentes \cite{kintis2010}.
 
-Para reduzir o número de mutantes, a seleção de operadores é a estratégia mais tradicional, mas não supera a aleatória \cite{zhang2010} e tem desempenho ruim em ao menos alguns programas \cite{kurtz2016}. \citeonline{just2012} mostram que o COR e o ROR, que criam 41\% dos mutantes, podem ser redefinidos sem redundância, o que reduz o tempo em até 34\%. A amostragem e a seleção estática são mais gerais: \citeonline{ashong2025a} comparam dez técnicas em 15 projetos Java e concluem que nenhuma é a melhor em todos os casos, mas que as de estratificação superam as demais em até 129 dos 135 cenários, e que a estratificação pelo arquivo de origem deu a melhor aproximação do escore em até 68. Outra linha concentra a mutação em caminhos propensos a falhas, com reduções de 28,10\% e de 27,63\% dos mutantes \cite{arasteh2022, arasteh2023}. Para a redundância, usam-se mutantes dominadores e subsunção \cite{kurtz2016, ojdanic2023}, e a mutação de ordem superior e a mutação fraca atingem de 96\% a 98\% da cobertura de mutação forte com menos equivalentes \cite{kintis2010}.
+Para os equivalentes, as estratégias ainda dependem de pessoas: \citeonline{guerino2024} usam LLMs para criar testes a partir dos sobreviventes e recorrem à revisão manual por outro avaliador, \citeonline{yao2014} aplicam um procedimento manual baseado em alcance, infecção e propagação, e \citeonline{nica2011} cogita um \textit{solver} de restrições. O escore também pode ser estimado sem executar os mutantes: o \textit{Predictive Mutation Testing} aprende com resultados já disponíveis \cite{zhang2019}, e o CBUA usa a cobertura das instruções mutadas, com uma única execução da suíte e sem dados de treino \cite{zhang2022}. No Google, a escala veio de mutar só o código alterado e coberto, gerar um mutante por linha, aplicar regras de supressão e limitar a sete mutantes por arquivo, com suporte a JavaScript, TypeScript e Dart \cite{petrovic2021}. Por fim, os mutantes mais realistas aumentam a relevância: o DeepMutation aprende com cerca de 787 mil falhas reais \cite{tufano2020}, e o iBiR gera falhas acopladas às reais em cerca de 36\% dos casos, contra menos de 4\% da mutação tradicional \cite{khanfir2023}.
 
-Para os equivalentes, as estratégias ainda dependem de pessoas: \citeonline{guerino2024} usam LLMs para criar testes a partir dos sobreviventes e recorrem à revisão manual por outro avaliador, \citeonline{yao2014} aplicam um procedimento manual baseado em alcance, infecção e propagação, e \citeonline{nica2011} cogita um \textit{solver} de restrições. O escore também pode ser estimado sem executar os mutantes: o \textit{Predictive Mutation Testing} aprende com resultados já disponíveis \cite{zhang2019}, e o CBUA usa a cobertura das instruções mutadas, com uma única execução da suíte e sem dados de treino \cite{zhang2022}. No Google, a viabilidade em escala veio da combinação de mutar só o código alterado e coberto, gerar um mutante por linha, aplicar regras de supressão e limitar a sete mutantes por arquivo, em um sistema que suporta JavaScript, TypeScript e Dart \cite{petrovic2021}. Por fim, os mutantes mais realistas aumentam a relevância: o DeepMutation aprende com cerca de 787 mil falhas reais \cite{tufano2020}, e o iBiR gera falhas acopladas às reais em cerca de 36\% dos casos, contra menos de 4\% da mutação tradicional \cite{khanfir2023}.
-
-Em síntese, as estratégias mais estudadas reduzem o número de mutantes, e nenhuma técnica é superior em todos os contextos. Para a \textit{web}, a única estratégia de seleção avaliada é a do MAEWU, e as demais dependem de WS-BPEL e EJB. As estratégias gerais de Java, C e Python não foram avaliadas em aplicações \textit{web}, mas a mutação orientada a mudanças do Google e a previsão do escore são candidatas naturais por não dependerem da linguagem. Esses resultados sustentam combinar a amostragem estratificada com a mutação restrita ao código coberto ou alterado.
+Em síntese, as estratégias mais estudadas reduzem o número de mutantes, e nenhuma técnica é superior em todos os contextos. Para a \textit{web}, a única estratégia de seleção avaliada é a do MAEWU, e as demais dependem de WS-BPEL e EJB. As estratégias gerais de Java, C e Python não foram avaliadas em aplicações \textit{web}, mas a mutação orientada a mudanças do Google e a previsão do escore são candidatas naturais por não dependerem da linguagem. Esses resultados sustentam combinar a amostragem estratificada com a mutação restrita ao código coberto ou alterado (Capítulo~4).
 
 \subsection{Quais fatores são associados à sobrevivência de mutantes nas suítes de testes avaliadas?}
 \label{subsec:fatores-sobrevivencia}
 
-Dos 37 estudos com dados extraídos, 18 reportam ao menos um fator associado à sobrevivência de mutantes, um trata os sobreviventes como equivalentes sem analisá-los \cite{khanfir2023} e 17 não informam fatores. Os fatores foram agrupados em oito categorias, apresentadas na Tabela~\ref{tab:fatores-sobrevivencia}, e um mesmo estudo pode contribuir para mais de uma delas. As evidências vêm predominantemente de programas Java e C avaliados com testes de unidade, enquanto apenas \citeonline{yandrapally2021} investigam a sobrevivência de mutantes em suítes de testes de interface de aplicações web.
+Dos 37 estudos com dados extraídos, 18 reportam ao menos um fator associado à sobrevivência de mutantes, um trata os sobreviventes como equivalentes sem analisá-los \cite{khanfir2023} e 18 não informam fatores. Os fatores foram agrupados em oito categorias, e um mesmo estudo pode contribuir para mais de uma: características da suíte de testes (10 estudos, 28\%), equivalência (9, 25\%), tipo de operador e dificuldade de detecção (7, 19\%), características e importância do código mutado (5, 14\%), cobertura do código mutado (4, 11\%), falha de alcance, infecção ou propagação do estado (3, 8\%), redundância entre mutantes (2, 6\%) e falhas reais não representadas pelos mutantes (2, 6\%). As evidências vêm quase todas de programas Java e C avaliados com testes de unidade, e apenas \citeonline{yandrapally2021} analisam por que mutantes sobrevivem em suítes de interface de aplicações \textit{web}. Por isso, as categorias são discutidas a partir de todos os estudos, e o fim desta seção trata da \textit{web}.
 
-\subsubsection{Características da suíte de testes}
-\label{subsubsec:caracteristicas-suite}
+A equivalência é apontada por nove estudos: um mutante equivalente mantém o comportamento do original, e nenhum teste o mata \cite{assylbekov2013, tao2025}. \citeonline{yao2014} detalham o fenômeno: em 1.230 mutantes de 18 programas, 23\% eram equivalentes e 7\% eram teimosos (não equivalentes que sobrevivem a uma suíte de boa qualidade), a equivalência se concentrou em poucos operadores (47\% dos mutantes do ABS) e a causa mais comum (51\%) foi o trecho mutado ser executado sem infectar o estado. O LCR gera 26\% de teimosos e 2\% de equivalentes, o oposto do ABS. \citeonline{esterobotaro2010} distinguem os mutantes fracos, mortos por todos os testes, dos resistentes, mortos por um único teste.
 
-Esta é a categoria mais frequente, identificada em 10 estudos (28\%). A sobrevivência está relacionada principalmente à qualidade dos casos de teste, às verificações realizadas e à forma como a suíte foi construída. \citeonline{alenezi2016} demonstram que uma quantidade maior de testes não implica necessariamente melhor cobertura de mutação, enquanto \citeonline{grano2019} associam maior eficácia à cobertura de comandos e à ausência de \textit{test smells}.
+Um mutante só morre se o código mutado for executado: em \citeonline{just2014}, 35\% dos testes que aumentaram a cobertura de comandos detectaram 10 ou mais mutantes adicionais, contra 3\% dos demais. Executar o trecho não basta, pois a alteração precisa infectar o estado e a infecção precisa se propagar até uma saída verificada pelos testes, as três etapas do modelo RIP \cite{yao2014, lin2018}. Em \citeonline{lin2018}, entre os mutantes que nenhum teste mata, 53\% não propagam o estado, 28\% não são alcançados e 19\% não o infectam. \citeonline{zhang2022} modelam a utilidade marginal decrescente: cada novo teste que cobre um mutante mata cada vez menos.
 
-\subsubsection{Demais fatores}
-\label{subsubsec:sintese-fatores}
+As características da suíte refletem a inadequação: o mutante é detectável, mas os testes existentes não o detectam \cite{inozemtseva2013}. Em \citeonline{alenezi2016}, a cobertura de mutação variou de 0,01\% a 77\% em seis aplicações Java, e mais casos de teste não significaram melhor cobertura. \citeonline{grano2019} mostra que testes efetivos têm alta cobertura de comandos e não têm \textit{test smells}, e \citeonline{petrovic2021} encontram relação negativa entre a exposição à análise de mutação e a sobrevivência ($r_s = -0,50$). Quanto ao código mutado, \citeonline{grano2019} mostra que, quanto maior e mais complexo, mais difícil revelar falhas, e \citeonline{yao2014} encontram forte correlação entre mutantes gerados e equivalentes ($\rho = 0,90$). Há ainda a redundância, pois em mais de 90\% das linhas com vários mutantes a maioria compartilha o mesmo destino \cite{petrovic2021}, e as falhas reais que nenhum mutante representa, 27\% em \citeonline{just2014}.
 
-Os demais fatores incluem, equivalência (9 estudos) o tipo de operador e a dificuldade de detecção (7 estudos), características do código mutado (5 estudos), cobertura do código (4), falhas de alcance, infecção ou propagação do estado (3), redundância entre mutantes (2) e limitações na representatividade de defeitos reais (2). Esses estudos indicam que a sobrevivência também pode depender da complexidade do programa, da ausência de execução do trecho modificado e da impossibilidade de observar seus efeitos \cite{grano2019, just2014, lin2018, zhang2019}.
+Das oito categorias, apenas três têm evidência em aplicações \textit{web}, todas do mesmo estudo. \citeonline{yandrapally2021} avaliaram 300 mutantes em seis aplicações: 93\% eram não equivalentes, e os equivalentes vieram sobretudo do SCM e do AAM (Seção~3.4.2). Os mutantes de manipuladores de evento foram os mais teimosos, com escore zero, pois matá-los exige realizar a ação e verificar o resultado, enquanto o TDM gera mutantes graves, mas fáceis de matar. A sobrevivência está, portanto, ligada à exigência de oráculos de comportamento e à frequência de uso de cada elemento nos testes. Não há evidência sobre cobertura, infecção e propagação, redundância ou representatividade das falhas em suítes de aplicações \textit{web}, e os resultados de Java e C não podem ser transferidos sem verificação.
 
-\begin{table}[H]
-    \centering
-    \footnotesize
-    \caption{Fatores associados à sobrevivência de mutantes}
-    \label{tab:fatores-sobrevivencia}
-    \begin{tabular}{|p{3.0cm}|p{3.8cm}|c|c|p{4.3cm}|}
-        \hline
-        \textbf{Fator} & \textbf{Exemplos} & \textbf{Estudos} & \textbf{\%} & \textbf{Referências} \\
-        \hline
-        Características da suíte de testes & Qualidade e forma de construção dos testes, oráculos, utilidade marginal decrescente & 10 & 28\% & \cite{esterobotaro2010, assylbekov2013, inozemtseva2013, alenezi2016, lin2018, grano2019, petrovic2021, yandrapally2021, zhang2022, ashong2026} \\
-        \hline
-        Equivalência & Mutante com o mesmo comportamento do original; trechos sem efeito observável & 9 & 25\% & \cite{zhang2019, belli2011, tao2025, yandrapally2021, he2024, just2014, yao2014, assylbekov2013, inozemtseva2013} \\
-        \hline
-        Tipo de operador e dificuldade de detecção & Mutantes teimosos ou resistentes; operadores que exigem testes específicos & 7 & 19\% & \cite{esterobotaro2010, belli2011, lin2018, yao2014, zhang2019, tao2025, yandrapally2021} \\
-        \hline
-        Características e importância do código mutado & Tamanho e complexidade; funcionalidades não implementadas; histórico de defeitos; uso pelos usuários & 5 & 14\% & \cite{belli2011, inozemtseva2013, yao2014, ahmed2016, grano2019} \\
-        \hline
-        Cobertura do código mutado & Local da mutação não executado; poucos testes cobrindo o mutante & 4 & 11\% & \cite{just2014, zhang2019, grano2019, zhang2022} \\
-        \hline
-        Falha de alcance, infecção ou propagação do estado & Estado não infectado; efeito não observável na saída & 3 & 8\% & \cite{yao2014, lin2018, zhang2019} \\
-        \hline
-        Redundância entre mutantes e estratégia de mutação & Mutantes que compartilham o mesmo destino; mutação fraca; mutantes disjuntos & 2 & 6\% & \cite{kintis2010, petrovic2021} \\
-        \hline
-        Falhas reais não representadas pelos mutantes & Operadores fracos, ausentes ou inexistentes; falhas de algoritmo e remoção de código & 2 & 6\% & \cite{just2014, petrovic2021} \\
-        \hline
-    \end{tabular}
-    \legend{Fonte: Autor (2026).}
-\end{table}
+Em síntese, a literatura associa a sobrevivência a oito fatores, dos quais os mais frequentes são as características da suíte (10 estudos), a equivalência (9) e o tipo de operador e a dificuldade de detecção (7). Eles levam a conclusões diferentes: mutantes equivalentes e mutantes cujo estado infectado não chega à saída não indicam fraqueza da suíte, enquanto a falta de cobertura, a ausência de oráculos e a baixa qualidade dos testes indicam melhorias possíveis. Interpretar um escore baixo exige, portanto, classificar os sobreviventes, como fazem \citeonline{yao2014}. Esses resultados sustentam a classificação planejada para a segunda etapa, em equivalente, difícil de detectar e inadequação da suíte, e a verificação da cobertura e da infecção e propagação do estado.
 
 \subsection[Distribuição por ano sobre testes de mutação]{Qual é a distribuição, por ano, das publicações sobre testes de mutação aplicados à avaliação de suítes de testes automatizados em aplicações web?}
 \label{subsec:distribucao-ano}
@@ -491,168 +322,28 @@ Em síntese, os estudos se distribuem de forma estável ao longo de 17 anos, com
 \subsection{Em quais revistas e conferências são publicados estudos sobre o tema?}
 \label{subsec:revistas-conferencias}
 
-Os 37 estudos com dados extraídos estão em 22 fontes: 6 periódicos, 13 conferências e 3 \textit{workshops}. A Tabela~\ref{tab:fontes-publicacao} reúne as fontes por tipo.
+Os 37 estudos com dados extraídos estão em 22 fontes: 6 periódicos, 13 conferências e 3 \textit{workshops}. A fonte vem do campo ``Fonte de Publicação'' da planilha, completado a partir dos artigos nos cinco estudos em que trazia só ``IEEE''. Nenhuma fonte é voltada à \textit{web}, e por isso a análise considera todos os estudos, e o fim desta seção trata dos três em contexto \textit{web}.
 
-Como é possível perceber, os 37 estudos estão em 22 fontes, com 64\% em conferências, 25\% em periódicos e 11\% em \textit{workshops}. Quatro fontes, o ESEC/FSE, o ICSE, a série ICST e o \textit{IEEE Transactions on Software Engineering}, reúnem 16 estudos (44\%), e as outras 17 têm até dois estudos cada. O uso de periódicos cresce depois de 2018, mas as conferências seguem como o principal meio. Para este trabalho, esses são os eventos e periódicos em que vale buscar estudos complementares e divulgar os resultados. Como a distribuição depende da \textit{string} de busca e dos critérios de seleção da revisão (Seção~\ref{sec:realizacao-busca}), ela não representa todas as fontes que publicam sobre o tema.
+Nove estudos (25\%) saíram em seis periódicos, e 28 em anais: 23 (64\%) em 13 conferências e 4 (11\%) em 3 \textit{workshops} (com os percentuais e contagens anteriores referenciados ao total de 36 estudos). O periódico mais frequente é o \textit{IEEE Transactions on Software Engineering}, com três estudos \cite{zhang2019, zhang2022, guizzo2022}, seguido do \textit{Journal of Electronic Testing}, com dois \cite{arasteh2022, arasteh2023}. Todos os periódicos são de 2018 em diante: nenhum dos 16 estudos de 2010 a 2016 saiu em periódico, contra 9 dos estudos de 2018 a 2026. Entre as conferências, o ESEC/FSE tem cinco estudos, o ICSE tem quatro e a série ICST tem quatro; o QRS e o SBQS, simpósio brasileiro, têm dois cada, e as outras oito conferências aparecem uma vez.
 
-\begin{table}[H]
-    \centering
-    \scriptsize
-    \caption{Fontes de publicação dos estudos}
-    \label{tab:fontes-publicacao}
-    \begin{tabular}{|p{2.3cm}|p{5.5cm}|c|p{4.7cm}|}
-        \hline
-        \textbf{Tipo} & \textbf{Fonte} & \textbf{Estudos} & \textbf{Referências} \\
-        \hline
-        Periódico & IEEE Transactions on Software Engineering & 3 & \cite{zhang2019, zhang2022, guizzo2022} \\
-        \hline
-        Periódico & Journal of Electronic Testing & 2 & \cite{arasteh2022, arasteh2023} \\
-        \hline
-        Periódico & ACM Transactions on Software Engineering and Methodology & 1 & \cite{khanfir2023} \\
-        \hline
-        Periódico & Journal of Systems and Software & 1 & \cite{tao2025} \\
-        \hline
-        Periódico & IEEE Access & 1 & \cite{lin2018} \\
-        \hline
-        Periódico & Data Technologies and Applications & 1 & \cite{shomali2020} \\
-        \hline
-        \textbf{Subtotal} & \textbf{Periódicos} & \textbf{9 (25\%)} & -- \\
-        \hline
-        Conferência & ESEC/FSE (Foundations of Software Engineering) & 5 & \cite{inozemtseva2013, just2014, kurtz2016, ahmed2016, ojdanic2023} \\
-        \hline
-        Conferência & ICSE (International Conference on Software Engineering) & 4 & \cite{zhang2010, yao2014, tufano2020, petrovic2021} \\
-        \hline
-        Conferência & ICST (International Conference on Software Testing, Verification and Validation) & 2 & \cite{nica2011, just2012} \\
-        \hline
-        Conferência & QRS (International Conference on Software Quality, Reliability and Security) & 2 & \cite{ashong2025, ashong2026} \\
-        \hline
-        Conferência & SBQS (Simpósio Brasileiro de Qualidade de Software) & 2 & \cite{kuroishi2020, guerino2024} \\
-        \hline
-        Conferência & ISSTA (International Symposium on Software Testing and Analysis) & 1 & \cite{grano2019} \\
-        \hline
-        Conferência & ICSME (International Conference on Software Maintenance and Evolution) & 1 & \cite{yandrapally2021} \\
-        \hline
-        Conferência & APSEC (Asia Pacific Software Engineering Conference) & 1 & \cite{kintis2010} \\
-        \hline
-        Conferência & CEE-SECR (Central and Eastern European Software Engineering Conference) & 1 & \cite{dimov2010} \\
-        \hline
-        Conferência & ICACEA (International Conference on Advances in Computer Engineering and Applications) & 1 & \cite{chauhan2015} \\
-        \hline
-        Conferência & UKSim (International Conference on Computer Modelling and Simulation) & 1 & \cite{assylbekov2013} \\
-        \hline
-        Conferência & OSSCOM (International Conference on Open Source Software Computing) & 1 & \cite{alenezi2016} \\
-        \hline
-        Conferência & SDPC (International Conference on Sensing, Diagnostics, Prognostics, and Control) & 1 & \cite{he2024} \\
-        \hline
-        \textbf{Subtotal} & \textbf{Conferências} & \textbf{23 (64\%)} & -- \\
-        \hline
-        Workshop & ICSTW (ICST Workshops) & 2 & \cite{esterobotaro2010, ashong2026} \\
-        \hline
-        Workshop & COMPSAC Workshops (Computer Software and Applications Conference) & 1 & \cite{belli2011} \\
-        \hline
-        Workshop & RAISE (International Workshop on Realizing AI Synergies in Software Engineering) & 1 & \cite{jalbert2012} \\
-        \hline
-        \textbf{Subtotal} & \textbf{Workshops} & \textbf{4 (11\%)} & -- \\
-        \hline
-        \textbf{Total} & \textbf{22 fontes} & \textbf{37 (100\%)} & -- \\
-        \hline
-    \end{tabular}
-    \legend{Fonte: Autor(2026).}
-\end{table}
+Os três estudos em contexto \textit{web} foram publicados em eventos, nenhum em periódico: \citeonline{yandrapally2021} na ICSME, \citeonline{belli2011} no COMPSAC \textit{Workshops} e \citeonline{esterobotaro2010} no ICSTW. Nenhum desses eventos é voltado à \textit{web}, o que mostra que o tema aparece em fontes gerais de engenharia de \textit{software}.
 
-Como é possível perceber, os 37 estudos estão em 22 fontes, com 64\% em conferências, 25\% em periódicos e 11\% em \textit{workshops}. Quatro fontes, o ESEC/FSE, o ICSE, a série ICST e o \textit{IEEE Transactions on Software Engineering}, reúnem 16 estudos (44\%), e as outras 17 têm até dois estudos cada. O uso de periódicos cresce depois de 2018, mas as conferências seguem como o principal meio. Para este trabalho, esses são os eventos e periódicos em que vale buscar estudos complementares e divulgar os resultados. Como a distribuição depende da \textit{string} de busca e dos critérios de seleção da revisão (Seção~\ref{sec:realizacao-busca}), ela não representa todas as fontes que publicam sobre o tema.
+Em síntese, os 37 estudos estão em 22 fontes, com 64\% em conferências, 25\% em periódicos e 11\% em \textit{workshops}. Quatro fontes (ESEC/FSE, ICSE, série ICST e \textit{IEEE Transactions on Software Engineering}) reúnem 16 estudos, e as outras 17 têm até dois estudos cada. São os eventos e periódicos em que vale buscar estudos complementares e divulgar os resultados. Como a distribuição depende da \textit{string} de busca e dos critérios de seleção (Seções~\ref{subsec:string-busca} e~\ref{sec:realizacao-busca}), ela não representa todas as fontes que publicam sobre o tema.
 
 \subsection{Quais métodos de validação empírica são utilizados nos estudos?}
 \label{subsec:metodos-validacao}
 
-Os 37 estudos foram classificados em sete grupos, segundo o método principal de validação empírica (Tabela~\ref{tab:validacao-empirica}), e um mesmo estudo pode somar técnicas complementares, como testes estatísticos e inspeção manual. Em oito estudos o campo ``Métodos de validação empírica'' estava vazio ou trazia só uma expressão, como ``Estudo de Caso'' ou ``Experimento'' \cite{just2012, kintis2010, tufano2020, ahmed2016, alenezi2016, zhang2022, ashong2025, ashong2026}, e o método foi completado a partir dos artigos quando eles estavam disponíveis. A maior parte dos estudos não é de aplicações web, e por isso a análise considera todos.
+Os 37 estudos foram agrupados em sete categorias segundo o método principal de validação empírica, podendo combinar técnicas complementares (como testes estatísticos em 10 estudos, inspeção manual em 7 e repetição de execuções em 6, reportadas em 18 estudos). Em oito trabalhos, o método foi complementado a partir do artigo completo \cite{just2012, kintis2010, tufano2020, ahmed2016, alenezi2016, zhang2022, ashong2025, ashong2026}. Como a maioria não trata de aplicações \textit{web}, a análise considera todo o conjunto.
 
+Os métodos mais frequentes são os experimentos comparativos com \textit{benchmarks} ou programas pequenos (10 estudos, 28\%: \cite{shomali2020, arasteh2022, arasteh2023, kurtz2016, zhang2010, kuroishi2020, kintis2010, lin2018, tao2025, nica2011}), que favorecem controle e repetibilidade, mas em programas de porte reduzido ou já conhecidos. Em seguida vêm os estudos empíricos em projetos reais de código aberto (9 estudos, 25\%: \cite{zhang2019, zhang2022, ashong2025, ashong2026, guizzo2022, ahmed2016, ojdanic2023, alenezi2016}), com maior validade externa porém limitados pelo custo computacional, e os estudos de caso ou piloto (8 estudos, 22\%: \cite{just2012, jalbert2012, belli2011, esterobotaro2010, assylbekov2013, inozemtseva2013, chauhan2015, he2024}), restritos a um ou poucos sistemas.
 
-Os experimentos comparativos com \textit{benchmarks} ou programas pequenos (10 estudos, 28\%) controlam as condições e permitem repetir o experimento, mas os programas são pequenos ou de uso conhecido: Shomali e Arasteh (2020) e \citeonline{arasteh2022} usam programas de 17 a 72 linhas, \citeonline{zhang2010} usam sete programas C com 50 suítes por configuração, \citeonline{kurtz2016} usam o \textit{benchmark} \textit{Siemens}, \citeonline{lin2018} analisam 22 programas e cerca de 96 mil mutantes, e \citeonline{nica2011} usa programas de até 100 linhas. Os nove estudos em projetos reais de código aberto (25\%) têm maior validade externa, mas o custo da análise limita o número de projetos: \citeonline{zhang2019} usam nove projetos-base e 154 do GitHub, de 172 a 92.176 linhas, \citeonline{ashong2025a} usam 15 projetos Java de 442 a 48.115 linhas, \citeonline{guizzo2022} usam dez sistemas e \citeonline{alenezi2016} usam seis projetos. Os oito estudos de caso ou piloto (22\%) aplicam a técnica a um ou poucos sistemas, como \citeonline{just2012}, com quatro programas de 3.000 a quase 40.000 linhas, e \citeonline{esterobotaro2010}, com três composições WS-BPEL. Três estudos são demonstrações ou avaliações preliminares \cite{tufano2020, dimov2010, grano2019}.
+Os demais grupos têm menor incidência: métodos mistos com análise manual (3 estudos, 8\%: \cite{yao2014, yandrapally2021, guerino2024}), demonstrações ou avaliações preliminares (3 estudos, 8\%: \cite{tufano2020, dimov2010, grano2019}), validação com falhas reais (2 estudos, 6\%: \cite{just2014, khanfir2023}) e estudo industrial longitudinal com grupo de controle ao longo de seis anos (1 estudo, 3\%: \cite{petrovic2021}). No contexto \textit{web}, os três estudos (\citeonline{yandrapally2021} com 6 aplicações e 300 mutantes inspecionados; \citeonline{belli2011} em dois módulos comerciais; e \citeonline{esterobotaro2010} em três composições WS-BPEL) adotam estudos de caso ou métodos mistos em pequena escala, sem falhas reais de referência.
 
-Poucos estudos usam falhas reais ou ambiente industrial. \citeonline{just2014} verificam se falhas reais são acopladas a mutantes e se a detecção de mutantes se correlaciona com a de falhas reais, e \citeonline{khanfir2023} comparam o iBiR e a mutação tradicional em falhas reais do \textit{Defects4J}. \citeonline{petrovic2021} fazem o único estudo industrial, longitudinal, ao longo de seis anos, com mais de 14 milhões de mutantes e grupo de controle. Três estudos combinam métodos com análise manual: \citeonline{yao2014}, com inspeção manual de 1.230 mutantes de 18 programas C; \citeonline{guerino2024}, com comparação estática e dinâmica de ferramentas Python e análise manual de equivalentes; e \citeonline{yandrapally2021}. Além do método principal, 18 estudos (50\%) informam técnicas complementares: análise estatística em 10 (correlação de \textit{Spearman}, teste de \textit{Wilcoxon}, tamanho de efeito e ANOVA), inspeção manual em 7, principalmente para classificar equivalentes, e repetição de execuções em 6. Como só foram contadas quando descritas, os números podem estar subestimados.
-
-Os três estudos em contexto \textit{web} usam estudos de caso ou métodos mistos, com poucos objetos. \citeonline{yandrapally2021} analisam manualmente 250 relatos de \textit{bugs}, de 6.331 coletados em 10 aplicações, para derivar os operadores, e fazem um experimento em seis aplicações, com 50 mutantes cada (300 no total, de cerca de 586 mil candidatos), analisados manualmente quanto à equivalência, à severidade e à teimosia. \citeonline{belli2011} fazem um estudo de caso em dois módulos de uma aplicação comercial \textit{web}, e \citeonline{esterobotaro2010} aplicam um procedimento a três composições WS-BPEL. Nenhum usa falhas reais como referência nem muitos projetos.
-
-Em síntese, os métodos mais usados são o experimento com \textit{benchmarks} ou programas pequenos (28\%), o estudo em projetos reais de código aberto (25\%) e o estudo de caso ou piloto (22\%), e só três estudos (8\%) usam falhas reais ou ambiente industrial. Para este trabalho, isso tem duas implicações. A mineração de repositórios com seis projetos \textit{web} de código aberto se aproxima do segundo grupo, e seis projetos é um número próximo ao de \citeonline{alenezi2016} e de \citeonline{yandrapally2021} e menor que os de \citeonline{guizzo2022} e de \citeonline{ashong2025a, ashong2026}. E a classificação manual dos sobreviventes tem precedentes em \citeonline{yao2014}, \citeonline{yandrapally2021} e \citeonline{guerino2024}, de modo que convém reportar também a concordância entre avaliadores.
-
-\begin{table}[H]
-    \centering
-    \scriptsize
-    \caption{Métodos de validação empírica, por método principal}
-    \label{tab:validacao-empirica}
-    \begin{tabular}{|p{3.0cm}|p{3.8cm}|c|c|p{4.0cm}|}
-        \hline
-        \textbf{Método} & \textbf{Descrição} & \textbf{Estudos} & \textbf{\%} & \textbf{Referências} \\
-        \hline
-        Experimento comparativo com \textit{benchmarks} ou programas pequenos & Técnica ou estratégia comparada com referência em programas conhecidos ou de pequeno porte & 10 & 28\% & \cite{shomali2020, arasteh2022, arasteh2023, kurtz2016, zhang2010, kuroishi2020, kintis2010, lin2018, tao2025, nica2011} \\
-        \hline
-        Estudo empírico em projetos reais de código aberto & Vários projetos ou versões, em comparação de técnicas ou em análise observacional & 9 & 25\% & \cite{zhang2019, zhang2022, ashong2025, ashong2026, guizzo2022, ahmed2016, ojdanic2023, alenezi2016} \\
-        \hline
-        Estudo de caso ou estudo piloto & Aplicação a um ou poucos sistemas, declarada como estudo de caso ou piloto ou restrita a um sistema & 8 & 22\% & \cite{just2012, jalbert2012, belli2011, esterobotaro2010, assylbekov2013, inozemtseva2013, chauhan2015, he2024} \\
-        \hline
-        Métodos mistos com análise manual & Experimento combinado com inspeção manual, análise de relatos de \textit{bugs} ou questionário & 3 & 8\% & \cite{yao2014, yandrapally2021, guerino2024} \\
-        \hline
-        Demonstração ou avaliação preliminar & Ferramenta, plataforma ou proposta apresentada com avaliação parcial ou planejada & 3 & 8\% & \cite{tufano2020, dimov2010, grano2019} \\
-        \hline
-        Validação com falhas reais & Mutantes ou falhas injetadas comparados a falhas reais & 2 & 6\% & \cite{just2014, khanfir2023} \\
-        \hline
-        Estudo industrial longitudinal & Observação ao longo de anos em ambiente industrial, com grupo de controle & 1 & 3\% & \cite{petrovic2021} \\
-        \hline
-        \textbf{Total} & \textbf{--} & \textbf{37} & \textbf{100\%} & \textbf{--} \\
-        \hline
-    \end{tabular}
-    \legend{Fonte: Autor (2026).}
-\end{table}
+Em síntese, predominam experimentos em programas pequenos/\textit{benchmarks} (28\%), projetos abertos (25\%) e estudos de caso/piloto (22\%), enquanto falhas reais ou ambiente industrial aparecem em apenas 8\% dos estudos. Para este trabalho, a análise de seis projetos \textit{web} de código aberto alinha-se ao grupo de projetos reais (próxima a \citeonline{alenezi2016} e \citeonline{yandrapally2021}), e a classificação manual dos mutantes sobreviventes segue precedentes consolidados \cite{yao2014, yandrapally2021, guerino2024}, recomendando-se registrar a concordância entre avaliadores.
 
 \subsection{Quais são os principais autores e grupos de pesquisa que investigam o tema?}
 \label{subsec:autores-grupos}
 
-Os 37 estudos somam 147 autorias de 123 autores distintos, com média de 4,1 autores por estudo, de um a sete; dois estudos têm um único autor \cite{nica2011, grano2019}. Os autores foram contados pelos nomes do campo ``Autores'' da planilha, sem verificar homônimos, e os grupos foram definidos pela coautoria entre os estudos, com as afiliações tiradas dos próprios artigos quando eles estavam disponíveis. Dezessete autores (14\%) aparecem em mais de um estudo, e 106 (86\%), em apenas um (Tabela~\ref{tab:autores-frequentes}). Os grupos são apresentados na Tabela~\ref{tab:grupos-pesquisa}. 
+Os 37 estudos somam 147 autorias de 123 autores distintos (média de 4,1 por trabalho, de um a sete; dois têm autor único \cite{nica2011, grano2019}), contabilizados pelo campo ``Autores'' sem verificação de homônimos, com grupos definidos por coautoria e afiliações obtidas dos artigos quando disponíveis. Dezessete autores (14\%) aparecem em mais de um estudo e 106 (86\%) em apenas um, destacando-se aqueles com três publicações: Just, Harman, Papadakis, Arasteh e os autores de \citeonline{ashong2025, ashong2025b, ashong2026} e dez com duas, com presença longitudinal de nomes como Papadakis (2010--2023) \cite{kintis2010, khanfir2023}, Just (2012--2021) \cite{just2012, petrovic2021}, Harman (2014--2023) \cite{yao2014, ojdanic2023} e Arasteh (2020--2023) \cite{shomali2020, arasteh2023} (com Lu Zhang unificado em \citeonline{zhang2010, zhang2019}).
 
-
-\begin{table}[H]
-    \centering
-    \scriptsize
-    \caption{Autores com mais de um estudo}
-    \label{tab:autores-frequentes}
-    \begin{tabular}{|p{3.2cm}|c|p{7.5cm}|}
-        \hline
-        \textbf{Autor} & \textbf{Estudos} & \textbf{Referências} \\
-        \hline
-        Just, René & 3 & \cite{just2012, just2014, petrovic2021} \\
-        \hline
-        Harman, Mark & 3 & \cite{yao2014, zhang2019, ojdanic2023} \\
-        \hline
-        Papadakis, Mike & 3 & \cite{kintis2010, ojdanic2023, khanfir2023} \\
-        \hline
-        Arasteh, Bahman & 3 & \cite{shomali2020, arasteh2022, arasteh2023} \\
-        \hline
-        Ashong, Magdalene; Laurent, Thomas; Ventresque, Anthony & 3 cada & \cite{ashong2025, ashong2026} \\
-        \hline
-        Jia, Yue & 2 & \cite{yao2014, zhang2019} \\
-        \hline
-        Zhang, Lu & 2 & \cite{zhang2010, zhang2019} \\
-        \hline
-        Yao, Xiangjuan & 2 & \cite{yao2014, tao2025} \\
-        \hline
-        Fraser, Gordon & 2 & \cite{just2014, petrovic2021} \\
-        \hline
-        Inozemtseva, Laura; Holmes, Reid & 2 cada & \cite{inozemtseva2013, just2014} \\
-        \hline
-        Delamaro, Márcio Eduardo & 2 & \cite{kurtz2016, kuroishi2020} \\
-        \hline
-        Vincenzi, Auri Marcelo Rizzo; Kuroishi, Pedro Henrique & 2 cada & \cite{kuroishi2020, guerino2024} \\
-        \hline
-        Gharehchopogh, Farhad Soleimanian & 2 & \cite{arasteh2022, arasteh2023} \\
-        \hline
-    \end{tabular}
-    \legend{Fonte: Autor (2026).}
-\end{table}
-
-\subsubsection{Autores, grupos de pesquisa e contexto web}
-\label{subsubsec:autores-grupos-web}
-
-Os 37 estudos reúnem 123 autores, dos quais 17 (14\%) aparecem em mais de uma publicação: sete em três estudos (Just, Harman, Papadakis, Arasteh e os três autores de \citeonline{ashong2025, ashong2025b, ashong2026}) e dez em dois, com recorrência longitudinal de nomes como Papadakis (2010--2023) \cite{kintis2010, khanfir2023}, Just (2012--2021) \cite{just2012, petrovic2021}, Harman (2014--2023) \cite{yao2014, ojdanic2023} e Arasteh (2020--2023) \cite{shomali2020, arasteh2023} (Lu Zhang foi unificado pelo nome em \citeonline{zhang2010, zhang2019}).
-
-Os três estudos em contexto web pertencem a equipes isoladas, sem autores recorrentes nem vínculo com os cinco grupos (como \citeonline{yandrapally2021}, na University of British Columbia, e \citeonline{esterobotaro2010}, na University of Cádiz; afiliações de \citeonline{belli2011} não verificadas). Assim, a concentração é moderada, os grupos recorrentes servem de referência para fundamentar e comparar achados, e a ausência de linhas contínuas na web reforça a relevância da investigação empírica proposta.
+Os três estudos em contexto \textit{web} vinculam-se a equipes isoladas, sem recorrência de autores nem ligação com os grupos principais, como \citeonline{yandrapally2021} (University of British Columbia) e \citeonline{esterobotaro2010} (University of Cádiz; afiliações de \citeonline{belli2011} não verificadas). Em síntese, há concentração moderada de autores e núcleos recorrentes que orientam a fundamentação e a comparação de resultados, enquanto a falta de continuidade na literatura \textit{web} reforça a pertinência da investigação empírica proposta.
