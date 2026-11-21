@@ -524,34 +524,15 @@ Dos 37 estudos com dados extraídos, 18 reportam ao menos um fator associado à 
 
 Esta é a categoria mais frequente, identificada em 10 estudos (28\%). A sobrevivência está relacionada principalmente à qualidade dos casos de teste, às verificações realizadas e à forma como a suíte foi construída. \citeonline{alenezi2016} demonstram que uma quantidade maior de testes não implica necessariamente melhor cobertura de mutação, enquanto \citeonline{grano2019} associam maior eficácia à cobertura de comandos e à ausência de \textit{test smells}.
 
-Além disso, \citeonline{assylbekov2013} apontam que testes baseados em entradas aleatórias podem deixar mutantes sobreviventes, enquanto \citeonline{zhang2022} discutem a utilidade marginal decrescente dos testes, na qual a adição de novos casos tende a produzir ganhos progressivamente menores na detecção de mutantes.
-
-\subsubsection{Equivalência}
-\label{subsubsec:equivalencia}
-
-A equivalência aparece em nove estudos (25\%). Mutantes equivalentes apresentam o mesmo comportamento do programa original e, portanto, não podem ser mortos por nenhum caso de teste \cite{assylbekov2013, tao2025}. Sua presença dificulta a interpretação da sobrevivência, pois nem todo mutante sobrevivente representa uma deficiência da suíte.
-
-\citeonline{yao2014} identificam que a equivalência pode ocorrer quando a alteração não modifica o estado do programa ou quando seus efeitos não alcançam uma saída observável. Os autores também demonstram que a frequência de mutantes equivalentes varia conforme o operador utilizado, reforçando a necessidade de considerar suas características durante a análise.
-
-\subsubsection{Tipo de operador e dificuldade de detecção}
-\label{subsubsec:tipo-operador}
-
-O tipo de operador e a dificuldade de detecção foram identificados em sete estudos (19\%). Determinados operadores produzem mutantes não equivalentes que exigem entradas ou verificações específicas para serem mortos, frequentemente denominados mutantes teimosos (\textit{stubborn mutants}) \cite{yao2014, zhang2019}.
-
-\citeonline{tao2025} associam essa dificuldade à pequena quantidade de entradas capazes de detectar determinadas alterações. Já \citeonline{lin2018} demonstram que a sobrevivência pode depender tanto das características dos mutantes quanto das estratégias utilizadas para selecionar os casos de teste. Dessa forma, diferentes operadores podem apresentar níveis distintos de dificuldade de detecção.
-
-\subsubsection{Demais fatores e síntese dos resultados}
+\subsubsection{Demais fatores}
 \label{subsubsec:sintese-fatores}
 
-Os demais fatores incluem características do código mutado (5 estudos), cobertura do código (4), falhas de alcance, infecção ou propagação do estado (3), redundância entre mutantes (2) e limitações na representatividade de defeitos reais (2). Esses estudos indicam que a sobrevivência também pode depender da complexidade do programa, da ausência de execução do trecho modificado e da impossibilidade de observar seus efeitos \cite{grano2019, just2014, lin2018, zhang2019}.
-
-Em síntese, a literatura associa a sobrevivência principalmente às características da suíte de testes, à equivalência dos mutantes e à dificuldade de detecção dos operadores. Esses fatores mostram que um mutante sobrevivente não indica necessariamente uma deficiência dos testes, sendo importante distinguir alterações equivalentes daquelas que poderiam ser detectadas por testes mais adequados. A escassez de evidências específicas sobre aplicações web também reforça a necessidade de investigar esses fatores nesse contexto.
+Os demais fatores incluem, equivalência (9 estudos) o tipo de operador e a dificuldade de detecção (7 estudos), características do código mutado (5 estudos), cobertura do código (4), falhas de alcance, infecção ou propagação do estado (3), redundância entre mutantes (2) e limitações na representatividade de defeitos reais (2). Esses estudos indicam que a sobrevivência também pode depender da complexidade do programa, da ausência de execução do trecho modificado e da impossibilidade de observar seus efeitos \cite{grano2019, just2014, lin2018, zhang2019}.
 
 \subsection[Distribuição por ano sobre testes de mutação]{Qual é a distribuição, por ano, das publicações sobre testes de mutação aplicados à avaliação de suítes de testes automatizados em aplicações web?}
 \label{subsec:distribucao-ano}
 
-Os 37 estudos com dados extraídos foram publicados entre 2010 e 2026, com ao menos um estudo em 16 dos 17 anos do intervalo; só 2017 não tem nenhum. O ano vem do campo ``Ano de Publicação'' da planilha de extração. A Figura~\ref{fig:publicacoes-ano-web} e a Tabela~\ref{tab:distribuicao-publicacoes} mostram a distribuição. A maior parte dos estudos não trata de aplicações web: apenas \citeonline{yandrapally2021} avaliam suítes de testes de aplicações web como objeto principal, e outros dois estudos têm relação indireta com o domínio web. Por isso, a distribuição é discutida a partir de todos os estudos, e a Seção~\ref{subsubsec:publicacoes-web} trata da parcela em contexto web.
-Os 36 estudos com dados extraídos foram publicados entre 2010 e 2026, com ao menos um estudo em 16 dos 17 anos do intervalo; só 2017 não tem nenhum. O ano vem do campo ``Ano de Publicação'' da planilha de extração. A Figura~\ref{fig:publicacoes-ano-web} mostra a distribuição.
+Os 37 estudos com dados extraídos foram publicados entre 2010 e 2026, com ao menos um estudo em 16 dos 17 anos do intervalo; só 2017 não tem nenhum. O ano vem do campo ``Ano de Publicação'' da planilha de extração. A Figura~\ref{fig:publicacoes-ano-web} mostra a distribuição.
 
 \begin{figure}[H]
     \centering
