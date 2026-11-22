@@ -1,2 +1,104 @@
 \chapter{Planejamento da Mineração de Repositórios}
 \label{cap:planejamento-tcc2}
+
+Este capítulo planeja a segunda etapa do trabalho: a aplicação do teste de mutação às suítes de testes de aplicações web de código aberto. O planejamento segue o padrão de \textit{Repository Mining} da ACM SIGSOFT (s.d.) e as três etapas propostas por Vidoni (2022), que são planejamento, execução e análise. Ele também usa as decisões que a RSL (Capítulo~\ref{cap:revisao-literatura}) deixou para esta proposta. Os critérios de seleção dos projetos e as atividades da segunda etapa já constam nas Seções~\ref{sec:metodologia} e~\ref{sec:secao17}.
+
+\section{Visão Geral da Solução}
+\label{sec:visao-geral-solucao}
+
+A solução avaliará a eficácia da suíte de testes de cada aplicação pela sua capacidade de detectar mutantes, que são alterações artificiais no código-fonte que a suíte deveria identificar \cite{ammann2016}. A RSL mostrou que o teste de mutação é a abordagem mais usada para esse fim. Por isso, a solução aplicará os mutantes ao código-fonte Python das aplicações e executará a suíte que o projeto já possui, sem criar novos testes Seção~\ref{subsec:processo-aplicacao}
+
+Essa escolha delimitará o que o resultado permite afirmar. Conforme a Seção~\ref{subsec:testes-web}, o \textit{mutation score} informa a capacidade da suíte de detectar alterações nos artefatos que foram mutados \cite{li2014webtesting}. Aqui, esses artefatos serão a lógica do código Python, e não a interface ou a navegação da aplicação. A solução tem quatro passos:
+
+\begin{enumerate}
+    \item Selecionar seis aplicações web de código aberto no GitHub e preparar o ambiente de cada uma (Seção~\ref{sec:selecao-preparacao});
+    \item Medir a linha de base, executando a suíte original e registrando a cobertura de código e o tempo de execução (Seção~\ref{sec:execucao-mutantes});
+    \item Gerar e executar os mutantes com uma ferramenta de mutação para Python, com o custo controlado (Seção~\ref{sec:execucao-mutantes});
+    \item Classificar os mutantes sobreviventes e analisar o \textit{mutation score} e os fatores de sobrevivência (Seção~\ref{sec:analise-validade}).
+\end{enumerate}
+
+\section{Seleção dos Projetos}
+\label{sec:selecao-preparacao}
+
+A fonte dos dados é o GitHub, e a unidade de análise é a suíte de testes de cada aplicação, como exige o padrão de mineração de repositórios (ACM SIGSOFT, s.d.). Os cinco critérios e a amostra de seis projetos estão na Seção~\ref{sec:metodologia}. A seleção será manual e seguirá estes passos:
+
+\begin{enumerate}
+    \item Busca de aplicações web em Python no GitHub, buscando variar o tamanho e o domínio dos projetos;
+    \item Triagem pelos cinco critérios, descartando \textit{forks} e repositórios duplicados ou derivados, projetos inativos e projetos com informações incompletas, que distorcem a amostra \cite{vidoni2022};
+    \item Verificação de execução: o projeto só entra na amostra se suas dependências forem instaladas e se a suíte passar no ambiente preparado, pois os mutantes só podem ser avaliados contra um programa original que os testes aprovam \cite{ammann2016};
+    \item Registro da URL, do \textit{commit} analisado, da data de coleta e das versões das dependências, para que a análise possa ser reproduzida \cite{vidoni2022}.
+\end{enumerate}
+
+
+\section{Procedimento de Execução}
+\label{sec:execucao-mutantes}
+
+\subsection{Ferramenta e Operadores}
+\label{subsec:ferramenta-operadores}
+
+A ferramenta será escolhida entre as quatro que \citeonline{guerino2024} comparam para Python: \textit{Cosmic Ray}, \textit{MutPy}, \textit{MutMut} e \textit{Mutatest}. Os critérios de escolha serão a compatibilidade com a versão do Python e com o \textit{framework} de testes dos projetos, o conjunto de operadores disponível, o registro do estado de cada mutante (morto, sobrevivente, tempo limite ou erro) e a manutenção ativa. A decisão será confirmada em um piloto com um dos projetos, e a mesma ferramenta será usada em todos, para que os escores sejam comparáveis Seção~\ref{subsec:mutation-score-avalicao}.
+
+Serão gerados mutantes de primeira ordem, com uma alteração por mutante, e a avaliação será de mutação forte: o mutante é morto quando algum teste produz resultado diferente do programa original \cite{ammann2016}. Os operadores serão os mais frequentes na RSL Seção~\ref{subsec:operadores-utilizadas}: substituição de operadores relacionais (\textit{ROR}, 16 estudos), aritméticos (\textit{AOR}, 15), lógicos e condicionais (\textit{LCR} e \textit{COR}, 14) e remoção de instruções e chamadas (\textit{SDL} e \textit{SBR}, 14). Se a ferramenta não tiver um desses operadores, será usado o mais próximo, e o conjunto efetivamente aplicado será registrado.
+
+\subsection{Execução e Controle de Custo}
+\label{subsec:execucao-controle-custo}
+
+Antes da mutação, a suíte original será executada mais de uma vez para registrar a cobertura, o tempo de execução e eventuais testes instáveis, que poderiam ser confundidos com mutantes mortos. O custo de execução e os mutantes equivalentes são as limitações mais comuns da RSL Seção~\ref{subsec:limitacoes-desafios}. Para conter o custo, o planejamento combina três estratégias da Seção~\ref{subsec:estrategias-reducao}:
+
+\begin{itemize}
+    \item Limitar o número de mutantes por amostragem. O \textit{MAEWU} limitou a avaliação a 50 mutantes por aplicação \cite{yandrapally2021}. Como nenhuma técnica de amostragem é a melhor em todos os casos e as estratificadas se destacam \cite{ashong2025b}, a amostra será estratificada por módulo, e o limite será definido no piloto, conforme o tempo da suíte. Com amostragem, o \textit{mutation score} é uma estimativa e será reportado como tal;
+    \item Executar a suíte só nos mutantes alcançados. Um mutante em código que nenhum teste executa sobrevive por definição, pois não há alcance \cite{ammann2016}. Esses mutantes não serão executados e serão contados à parte, o que reduz o custo e separa a falta de cobertura da falta de verificação. Essa ideia se inspira na mutação restrita ao código alterado do sistema do Google \cite{petrovic2021};
+    \item Evitar testes irrelevantes. \citeonline{guerino2024} apontam, nas ferramentas Python, a execução de testes irrelevantes para cada mutante como oportunidade de otimização. O piloto verificará se a ferramenta escolhida executa apenas os testes que cobrem o trecho mutado.
+\end{itemize}
+
+\subsection{Dados Coletados}
+\label{subsec:dados-coletados}
+
+A Tabela~\ref{quad:dados-coletados} resume os dados coletados em cada aplicação e o seu uso na análise.
+
+\begin{table}[htb]
+    \centering
+    \caption{Dados coletados por aplicação}
+    \label{quad:dados-coletados}
+    \begin{tabular}{p{4.5cm}p{4.5cm}p{5.5cm}}
+        \toprule
+        \textbf{Dado} & \textbf{Fonte} & \textbf{Uso na análise} \\
+        \midrule
+        Mutantes gerados, mortos, sobreviventes, com tempo limite ou inválidos & Relatório da ferramenta de mutação & Calcular o \textit{mutation score} (Equação~2.1) \\
+        Operador e módulo de cada mutante & Relatório da ferramenta de mutação & Comparar o escore por tipo de alteração e por módulo \\
+        Mutantes equivalentes & Classificação manual dos sobreviventes (Seção~\ref{sec:analise-validade}) & Calcular o escore ajustado ($M - E$) \\
+        Cobertura de linhas e de ramos & Ferramenta de cobertura de Python & Separar mutantes não alcançados dos não detectados \\
+        Tempo de execução da suíte e da mutação & Medição no ambiente de execução & Estimar o custo da análise \\
+        \bottomrule
+    \end{tabular}
+    \legend{Fonte: Autor (2026).}
+\end{table}
+
+\section{Análise dos Resultados e Ameaças à Validade}
+\label{sec:analise-validade}
+
+A métrica principal é o \textit{mutation score} sobre os mutantes não equivalentes, a mais usada na RSL (Seção~\ref{subsec:metricas-utilizadas}). Como a ferramenta escolhida provavelmente não marca equivalentes \cite{guerino2024}, serão reportados o escore bruto, com $E = 0$, e o escore ajustado, após a classificação manual. A análise será descritiva por aplicação, por operador e por módulo. Com apenas seis aplicações, a relação entre cobertura e escore será examinada de forma exploratória, sem inferência estatística, e comparada às conclusões de \citeonline{inozemtseva2014} e de \citeonline{just2014}.
+
+Os mutantes sobreviventes serão classificados em três categorias, que correspondem aos fatores mais frequentes da RSL Seção~\ref{subsec:fatores-sobrevivencia}: equivalente, sem diferença de comportamento a detectar; difícil de detectar, em que a alteração altera o estado interno mas o efeito não chega a um resultado observado (infecção sem propagação); e inadequação da suíte, por falta de cobertura ou de verificações \cite{ammann2016, barr2015}. Dois anotadores classificarão os sobreviventes de forma independente, com procedimento de decisão de equivalência como o de \citeonline{yao2014}, e a concordância será medida pelo coeficiente kappa de Cohen, com divergências resolvidas por consenso. Se houver muitos sobreviventes, será classificada uma amostra estratificada por operador.
+
+As ameaças à validade seguem as quatro categorias de \citeonline{wohlin2015}, vistas na Seção~\ref{subsec:planejamento-mensuracao}:
+
+\begin{itemize}
+    \item \textbf{Externa:} seis projetos Python, escolhidos de forma não aleatória, não permitem generalizar para outras linguagens nem para outras aplicações web. Variar o tamanho e o domínio dos projetos reduz a ameaça \cite{ashong2025b};
+    \item \textbf{Construção:} mutantes não são defeitos reais, embora \citeonline{just2014} mostrem associação entre os dois. Como a mutação atinge só o código Python, o escore não mede a detecção de alterações na interface ou na navegação \cite{li2014webtesting};
+    \item \textbf{Interna:} a classificação de equivalência é subjetiva e testes instáveis distorcem o escore. Os dois anotadores, a concordância medida e a execução repetida da linha de base reduzem a ameaça;
+    \item \textbf{Conclusão:} a amostra pequena de aplicações e a amostragem de mutantes tornam o escore uma estimativa. Por isso, o resultado será descrito sem generalização estatística;
+    \item \textbf{Reprodutibilidade:} o registro das versões, das dependências e das datas de coleta (Seção~\ref{sec:selecao-preparacao}) permite repetir a análise \cite{vidoni2022}.
+\end{itemize}
+
+\section{Decisões em Aberto para o TCC 2}
+\label{sec:decisoes-abertas}
+
+As atividades da segunda etapa estão na Seção~\ref{subsec:segunda-etapa}. Três decisões deste planejamento dependem de um piloto com um dos projetos e serão fechadas no início do TCC~2:
+
+\begin{itemize}
+    \item a ferramenta de mutação para Python e o conjunto de operadores efetivamente disponível (Seção~\ref{subsec:ferramenta-operadores});
+    \item o limite de mutantes por aplicação e a taxa de amostragem, conforme o tempo de execução de cada suíte (Seção~\ref{subsec:execucao-controle-custo});
+    \item o tamanho da amostra de sobreviventes a classificar, conforme o número de sobreviventes observado (Seção~\ref{sec:analise-validade}).
+\end{itemize}
+
