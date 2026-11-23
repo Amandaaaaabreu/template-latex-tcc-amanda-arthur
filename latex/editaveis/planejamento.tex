@@ -20,7 +20,23 @@ Essa escolha delimitará o que o resultado permite afirmar. Conforme a Seção~\
 \section{Seleção dos Projetos}
 \label{sec:selecao-preparacao}
 
-A fonte dos dados é o GitHub, e a unidade de análise é a suíte de testes de cada aplicação, como exige o padrão de mineração de repositórios (ACM SIGSOFT, s.d.). Os cinco critérios e a amostra de seis projetos estão na Seção~\ref{sec:metodologia}. A seleção será manual e seguirá estes passos:
+A fonte dos dados é o GitHub, e a unidade de análise é a suíte de testes de cada aplicação, como exige o padrão de mineração de repositórios (ACM SIGSOFT, s.d.). Os projetos da segunda etapa são escolhidos de forma manual no GitHub, em uma amostra não aleatória de seis repositórios que atendam aos seguintes critérios de seleção:
+
+\begin{enumerate}
+    \item possuir suíte de testes automatizados;
+    \item ser uma aplicação web;
+    \item ser desenvolvido em Python;
+    \item ter entre 100 e 100.000 linhas de código;
+    \item ter atividade da comunidade nos últimos 12 meses.
+\end{enumerate}
+
+O primeiro critério, a existência de uma suíte de testes abrangente, segue Just, Jalali e Ernst (2014). Ao avaliar se mutantes substituem faltas reais, os autores selecionaram programas de código aberto que possuíam suítes de testes abrangentes escritas pelos desenvolvedores, além de controle de versão e rastreamento de defeitos \cite{just2014}. Eles também descartaram o repositório SIR por reunir programas pequenos, com mediana de 120 linhas de código, e sem suítes de testes abrangentes, o que sustenta a exigência de um tamanho mínimo para os projetos \cite{just2014}.
+
+Os critérios de ser uma aplicação web e de ter interesse da comunidade seguem Yandrapally e Mesbah (2021). Para analisar defeitos de aplicações web, os autores coletaram relatos de dez aplicações de código aberto populares, com no mínimo 1000 downloads no SourceForge ou mais de 100 estrelas no GitHub, e avaliaram o framework MAEWU em seis aplicações web de código aberto, cada uma com uma suíte de testes de interface escrita manualmente \cite{yandrapally2021}. O número de seis projetos é compatível com o de Alenezi et al. (2016), que avaliaram a eficácia de suítes de testes em seis aplicações de código aberto \cite{alenezi2016}. Além disso, a amostra pequena é uma limitação comum nos estudos com teste de mutação, pois o custo da análise restringe o número de projetos: Ashong, Laurent e Ventresque (2025b) analisaram 15 projetos pelo mesmo motivo e, para limitar a ameaça à generalização, escolheram projetos de tamanhos e domínios diferentes \cite{ashong2025b}.
+
+A faixa de 100 a 100.000 linhas de código tem o objetivo de reunir projetos de tamanhos variados. Ashong, Laurent e Ventresque (2025b) escolheram os projetos de sua avaliação por seus diferentes tamanhos e domínios de aplicação, para reduzir a ameaça à generalização dos resultados \cite{ashong2025b}. As aplicações web de código aberto também variam muito de tamanho: as dez analisadas por Yandrapally e Mesbah (2021) vão de cerca de 29 mil, no projeto Tudu Lists, a 4 milhões, no TikiWiki \cite{yandrapally2021}. O limite inferior evita programas muito pequenos, que Just, Jalali e Ernst (2014) consideraram inadequados por não terem suítes de testes abrangentes \cite{just2014}, e o limite superior ajuda a conter o custo da análise de mutação, que restringe o tamanho dos conjuntos de projetos estudados \cite{ashong2025b}.
+
+A seleção será manual e seguirá estes passos:
 
 \begin{enumerate}
     \item Busca de aplicações web em Python no GitHub, buscando variar o tamanho e o domínio dos projetos;
