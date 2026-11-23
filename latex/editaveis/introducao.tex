@@ -130,49 +130,6 @@ Na fase tática, o processo de pesquisa é misto, com predominância quantitativ
 
 Na fase operacional, a coleta de dados usa uma fonte em cada etapa. Na primeira, trata-se de pesquisa em arquivos (\textit{archival research}): os dados dos estudos selecionados foram extraídos na ferramenta Evidentia e consolidados em planilha, formando um corpus de 37 artigos. Na segunda, os dados são adquiridos por mineração de repositórios públicos de código aberto, hospedados em plataformas como o GitHub, e produzidos pela execução automatizada dos mutantes sobre as suítes de testes das aplicações web escolhidas. A análise de dados combina a análise estatística, para descrever o indicador de mutação e o custo de execução, e a análise temática, para sintetizar os resultados da RSL e classificar manualmente os mutantes sobreviventes quanto à equivalência, à dificuldade de detecção e à inadequação da suíte. Essa classificação é feita por mais de um anotador, e a concordância entre eles é medida e reportada, como recomenda o padrão de mineração de repositórios \cite{acmsigsoft}.
 
-
-\todo[inline, color=pink]{Levem esse texto sobre os critérios para o cap. do planejamento do estudo. Isso não precisa ser discutido na introdução.}
-
-Os projetos da segunda etapa são escolhidos de forma manual no GitHub, em uma amostra não aleatória de seis repositórios que atendam aos seguintes critérios de seleção:
-
-\begin{enumerate}[noitemsep, topsep=0pt]
-    \item possuir suíte de testes automatizados;
-    \item ser uma aplicação web;ão
-    \item ser desenvolvido em Python;
-    \item ter entre 100 e 100.000 linhas de código;
-    \item ter atividade da comunidade nos últimos 12 meses.
-\end{enumerate}
-
-O primeiro critério, a existência de uma suíte de testes abrangente, segue \citeonline{just2014}. Ao avaliar se mutantes substituem faltas reais, os autores selecionaram programas de código aberto que possuíam suítes de testes abrangentes escritas pelos desenvolvedores, além de controle de versão e rastreamento de defeitos \cite{just2014}. Eles também descartaram o repositório SIR por reunir programas pequenos, com mediana de 120 linhas de código, e sem suítes de testes abrangentes, o que sustenta a exigência de um tamanho mínimo para os projetos \cite{just2014}.
-
-Os critérios de ser uma aplicação web e de ter interesse da comunidade seguem \citeonline{yandrapally2021}. Para analisar defeitos de aplicações web, os autores coletaram relatos de dez aplicações de código aberto populares, com no mínimo 1000 downloads no SourceForge ou mais de 100 estrelas no GitHub, e avaliaram o framework MAEWU em seis aplicações web de código aberto, cada uma com uma suíte de testes de interface escrita manualmente \cite{yandrapally2021}. O número de seis projetos é compatível com o de \citeonline{alenezi2016}, que avaliaram a eficácia de suítes de testes em seis aplicações de código aberto \cite{alenezi2016}. Além disso, a amostra pequena é uma limitação comum nos estudos com teste de mutação, pois o custo da análise restringe o número de projetos: \citeonline{ashong2025} analisaram 15 projetos pelo mesmo motivo e, para limitar a ameaça à generalização, escolheram projetos de tamanhos e domínios diferentes \cite{ashong2025}.
-
-A faixa de 100 a 100.000 linhas de código tem o objetivo de reunir projetos de tamanhos variados. \citeonline{ashong2025} escolheram os projetos de sua avaliação por seus diferentes tamanhos e domínios de aplicação, para reduzir a ameaça à generalização dos resultados \cite{ashong2025}. As aplicações web de código aberto também variam muito de tamanho: as dez analisadas por \citeonline{yandrapally2021} vão de cerca de 29 mil, no projeto Tudu Lists, a 4 milhões, no TikiWiki \cite{yandrapally2021}. O limite inferior evita programas muito pequenos, que \citeonline{just2014} consideraram inadequados por não terem suítes de testes abrangentes \cite{just2014}, e o limite superior ajuda a conter o custo da análise de mutação, que restringe o tamanho dos conjuntos de projetos estudados \cite{ashong2025}.
-
-
-Cabe observar que a a Figura~\ref{fig:exemplo2} exemplifica a metodologia de pesquisa com o estudo de caso, a pesquisa-ação e o \textit{design science}; neste trabalho, a estrutura é usada como guia para organizar as decisões, e a metodologia adotada na segunda etapa é a mineração de repositórios. Dessa forma, as decisões se distribuem nas duas etapas do trabalho: a primeira concentra a RSL e a definição da solução, e a segunda concentra a aplicação e a avaliação da solução por meio da mineração de repositórios, conforme o cronograma apresentado na  Seção~\ref{sec:secao17}.
-
-
-
-\section{Organização do Trabalho}
-\label{sec:organizacao-trabalho}
-
-Esta subseção visa apresentar a estrutura do documento e o que está presente em cada capítulo desta monografia.
-
-\begin{itemize}
-    \item Introdução: apresentação do trabalho, do seu contexto e problemática, além da sua questão de pesquisa e objetivos.
-    
-    \item Referencial Teórico: fundamentação teórica do presente trabalho; explanação sobre os principais tópicos relacionados ao contexto desta pesquisa: testes automatizados de aplicações web, cobertura de código, teste de mutação, operadores, indicador de mutação, mutantes equivalentes e sobreviventes;
-    
-    \item Revisão Estruturada da Literatura: metodologia empregada para a seleção dos estudos que compõem o material bibliográfico; descrição do protocolo utilizado (GQM, PICO, critérios de inclusão e exclusão e extração de dados), bem como os resultados da pesquisa e as respostas às questões secundárias;
-    
-    \item Proposta da Solução: descrição da abordagem para avaliar a eficácia das suítes de testes, com ferramentas, operadores e estratégias de redução de custo escolhidos a partir da revisão; definição dos procedimentos a serem realizados;
-    
-    \item Execução e Resultados: relato das atividades executadas sobre as aplicações web de código aberto e dos seus resultados, além de discussões sobre suas implicações e ameaças à validade; e
-    
-    \item Conclusão: visão geral dos resultados encontrados e de como estes respondem à questão norteadora; além disso, também são discutidas as limitações deste trabalho e as oportunidades de trabalhos futuros.
-\end{itemize}
-
 \section{Cronograma e Atividades}
 \label{sec:secao17}
 
