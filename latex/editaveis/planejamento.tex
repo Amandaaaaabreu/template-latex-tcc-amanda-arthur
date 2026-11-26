@@ -1,2 +1,143 @@
 \chapter{Planejamento da Mineração de Repositórios}
 \label{cap:planejamento-tcc2}
+
+Este capítulo planeja a segunda etapa do trabalho: a aplicação do teste de mutação às suítes de testes de aplicações web de código aberto. O planejamento segue o padrão de \textit{Repository Mining} da \citeonline{acmsigsoft} e as três etapas propostas por \citeonline{vidoni2022}, que são planejamento, execução e análise. Ele também usa as decisões que a RSL (Capítulo~\ref{cap:revisao-literatura}) deixou para esta proposta. Os critérios de seleção dos projetos e as atividades da segunda etapa já constam nas Seções~\ref{sec:metodologia} e~\ref{sec:secao17}.
+
+\section{Visão Geral da Solução}
+\label{sec:visao-geral-solucao}
+
+A solução avaliará a eficácia da suíte de testes de cada aplicação pela sua capacidade de detectar mutantes. A RSL mostrou que o teste de mutação é a abordagem mais usada para esse fim. Por isso, a solução aplicará os mutantes ao código-fonte Python das aplicações e executará a suíte que o projeto já possui, sem criar novos testes (Seção~\ref{subsec:processo-aplicacao}).
+
+Essa escolha delimitará o que o resultado permite afirmar. Conforme a Seção~\ref{subsec:testes-web}, o \textit{mutation score} informa a capacidade da suíte de detectar alterações nos artefatos que foram mutados \cite{li2014webtesting}. Aqui, esses artefatos serão a lógica do código Python, e não a interface ou a navegação da aplicação. A solução tem quatro passos:
+
+\begin{enumerate}
+    \item Selecionar seis aplicações web de código aberto no GitHub, verificar a execução dos testes e registrar o ambiente de cada projeto (Seção~\ref{sec:selecao-preparacao});
+    \item Medir a linha de base, executando os testes incluídos no estudo sobre o código original e registrando a cobertura e o tempo de execução (Seção~\ref{sec:execucao-mutantes});
+    \item Gerar e executar os mutantes com uma ferramenta de mutação para Python, com o custo controlado (Seção~\ref{sec:execucao-mutantes});
+    \item Classificar os mutantes sobreviventes e analisar o \textit{mutation score} e os fatores de sobrevivência (Seção~\ref{sec:analise-validade}).
+\end{enumerate}
+
+\section{Seleção dos Projetos}
+\label{sec:selecao-preparacao}
+
+A fonte dos dados é o GitHub, e a unidade de análise é a suíte de testes de cada aplicação, como exige o padrão de mineração de repositórios (ACM SIGSOFT, s.d.). Os projetos da segunda etapa foram selecionados manualmente no GitHub. A amostra não aleatória reúne seis repositórios, identificados na Seção~\ref{sec:execucao-mutantes}, aos quais foram aplicados os seguintes critérios:
+
+\begin{enumerate}
+    \item possuir suíte de testes automatizados;
+    \item ser uma aplicação web;
+    \item ser desenvolvido em Python;
+    \item ter entre 100 e 100.000 linhas de código;
+    \item ter atividade da comunidade nos últimos 12 meses.
+\end{enumerate}
+
+Ao avaliar se mutantes substituem faltas reais, os autores selecionaram programas de código aberto que possuíam suítes de testes abrangentes escritas pelos desenvolvedores, além de controle de versão e rastreamento de defeitos \cite{just2014}. Eles também descartaram o repositório SIR por reunir programas pequenos, com mediana de 120 linhas de código, e sem suítes de testes abrangentes, o que sustenta a exigência de um tamanho mínimo para os projetos \cite{just2014}.
+
+Os critérios de ser uma aplicação web e de ter interesse da comunidade seguem \citeonline{yandrapally2021}. Para analisar defeitos de aplicações web, os autores coletaram relatos de dez aplicações de código aberto populares, com no mínimo 1000 downloads no SourceForge ou mais de 100 estrelas no GitHub, e avaliaram o framework MAEWU em seis aplicações web de código aberto, cada uma com uma suíte de testes de interface escrita manualmente \cite{yandrapally2021}. O número de seis projetos é compatível com o de \citeonline{alenezi2016}, que avaliaram a eficácia de suítes de testes em seis aplicações de código aberto \cite{alenezi2016}.
+
+A faixa de 100 a 100.000 linhas de código tem o objetivo de reunir projetos de tamanhos variados. \citeonline{ashong2025b} escolheram os projetos de sua avaliação por seus diferentes tamanhos e domínios de aplicação, para reduzir a ameaça à generalização dos resultados.
+
+O procedimento de seleção seguiu as etapas abaixo. A busca, a triagem e a verificação de execução (itens 1 a 3) já foram realizadas nos seis projetos. Resta consolidar o registro de reprodutibilidade (item 4).
+
+\begin{enumerate}
+    \item Busca de aplicações web em Python no GitHub, buscando variar o tamanho e o domínio dos projetos;
+    \item Triagem pelos cinco critérios, descartando \textit{forks} e repositórios duplicados ou derivados, projetos inativos e projetos com informações incompletas, que distorcem a amostra \cite{vidoni2022};
+    \item Verificação de execução: o projeto só entra na amostra se suas dependências forem instaladas e se a suíte passar no ambiente preparado, pois os mutantes só podem ser avaliados contra um programa original que os testes aprovam \cite{ammann2016};
+    \item Registro da URL, do \textit{commit} analisado, da data de coleta e das versões das dependências, para que a análise possa ser reproduzida \cite{vidoni2022}.
+\end{enumerate}
+
+
+\section{Procedimento de Execução}
+\label{sec:execucao-mutantes}
+
+A execução será realizada nos seis projetos já selecionados, conforme a Seção~\ref{sec:selecao-preparacao}. A Tabela~\ref{tab:projetos-selecionados} apresenta os projetos e seus repositórios de origem.
+
+\begin{table}[htb]
+    \centering
+    \caption{Projetos selecionados para a execução do teste de mutação}
+    \label{tab:projetos-selecionados}
+    \begin{tabular}{@{}ll@{}}
+        \toprule
+        \textbf{Projeto} & \textbf{Repositório GitHub} \\
+        \midrule
+        SearXNG & \url{https://github.com/searxng/searxng} \\
+        Healthchecks & \url{https://github.com/healthchecks/healthchecks} \\
+        Mealie & \url{https://github.com/mealie-recipes/mealie} \\
+        changedetection.io & \url{https://github.com/dgtlmoon/changedetection.io} \\
+        wger & \url{https://github.com/wger-project/wger} \\
+        linkding & \url{https://github.com/sissbruecker/linkding} \\
+        \bottomrule
+    \end{tabular}
+    \legend{Fonte: Autor (2026).}
+\end{table}
+
+\subsection{Ferramenta e Operadores}
+\label{subsec:ferramenta-operadores}
+
+A ferramenta prevista para os seis projetos é o \textit{MutPy}, uma das quatro ferramentas para Python comparadas por \citeonline{guerino2024}. O MutPy permite selecionar módulos, testes e operadores, além de registrar o resultado de cada mutante. O piloto verificará a compatibilidade da versão adotada com o Python, o executor de testes e as dependências de cada projeto. Serão gerados mutantes de primeira ordem e será empregada a mutação forte, na qual o mutante é morto quando ao menos um teste que passa no programa original falha ao executar a versão mutada \cite{ammann2016}.
+
+As cinco famílias de operadores definidas para o estudo são substituição de operadores aritméticos (\textit{AOR}), substituição de conectores lógicos (\textit{LCR}), substituição de operadores relacionais (\textit{ROR}), inserção de operadores unários (\textit{UOI}) e remoção de blocos de instruções (\textit{SBR}). A escolha considera as famílias recorrentes na RSL (Seção~\ref{subsec:operadores-utilizadas}) e adota como referência principal o conjunto empregado por \citeonline{petrovic2021} em \textit{Does Mutation Testing Improve Testing Practices?}\footnote{Artigo publicado no ICSE 2021, DOI \url{https://doi.org/10.1109/ICSE43902.2021.00087}.} Na Seção~II, os autores descrevem os cinco operadores e explicam como escolhem qual aplicar a cada linha com base no histórico de sobrevivência e de utilidade dos mutantes. Na Seção~IV-C.2, justificam a escolha do conjunto e das regras de supressão pela necessidade de tornar a análise escalável e de manter administrável a quantidade de mutantes apresentados aos desenvolvedores.
+
+O MutPy oferece AOR, LCR e ROR com essas siglas. Para contemplar as famílias UOI e SBR sem implementar novos operadores, o piloto avaliará como aproximações o \textit{COI}, que insere negação nas condições de \texttt{if} e \texttt{while} e troca \texttt{in} por \texttt{not in}, e o \textit{SDL}, operador experimental que substitui instruções individuais por \texttt{pass}. O SDL pode remover atribuições e instruções \texttt{return}, que o SBR do estudo de referência preserva. A configuração final registrará as regras efetivamente aplicadas e os resultados usarão as siglas dos operadores executados.\footnote{Código-fonte e documentação do MutPy em \url{https://github.com/mutpy/mutpy}.}
+
+\subsection{Execução e Controle de Custo}
+\label{subsec:execucao-controle-custo}
+
+Antes da mutação, os testes selecionados serão executados mais de uma vez no código original, no mesmo ambiente da análise, para registrar a cobertura, o tempo de execução e eventuais instabilidades. O procedimento registrará os módulos e os testes incluídos em cada projeto. Quando a execução abranger parte da suíte, a interpretação do escore ficará restrita aos testes e módulos avaliados. O custo de execução e os mutantes equivalentes estão entre as limitações mais comuns da RSL (Seção~\ref{subsec:limitacoes-desafios}). Para controlar esse custo, serão adotadas as seguintes medidas:
+
+\begin{itemize}
+    \item \textbf{Delimitação dos módulos e amostragem.} A amostragem está entre as estratégias identificadas na RSL (Seção~\ref{subsec:estrategias-reducao}). Os módulos serão definidos antes da execução final. O MutPy permite rodar cada módulo separadamente e usar \texttt{--percentage} para amostrar candidatos à mutação. Essa opção aplica uma probabilidade de inclusão e pode produzir quantidades diferentes entre execuções. Cotas fixas por módulo exigirão a seleção externa dos candidatos antes da execução. Serão registrados o critério de seleção, a taxa quando aplicável e os mutantes efetivamente analisados. Para consolidar os resultados por projeto, a agregação considerará os tamanhos dos estratos quando houver taxas de inclusão diferentes e esses tamanhos forem conhecidos. Os escores obtidos por amostragem serão reportados como estimativas para o recorte avaliado.
+    \item \textbf{Restrição ao código coberto.} O parâmetro \texttt{--coverage} restringe a geração a nós da árvore sintática alcançados na linha de base instrumentada pelo MutPy. O escore será interpretado no contexto desse filtro. A cobertura de linhas e ramos será registrada à parte. A contagem de mutantes potenciais em código não coberto exigiria um inventário independente dos candidatos, pois o relatório da execução filtrada não inclui esses mutantes. A restrição por alcance também é empregada por \citeonline{petrovic2021} no contexto de revisão de código.
+    \item \textbf{Filtragem de testes por mutante.} Com \texttt{--coverage}, o MutPy procura omitir os testes cujo registro de cobertura não contém o nó mutado. Na versão 0.6.1, uma falha na iteração das suítes do \texttt{unittest} impede essa filtragem.\footnote{Implementação de \texttt{UnittestTestSuite.iter\_tests} na versão 0.6.1 em \url{https://github.com/mutpy/mutpy/blob/v0.6.1/mutpy/test_runners/unittest_runner.py}.} O piloto verificará o funcionamento da filtragem no executor de cada projeto e medirá o ganho, incluindo o custo da instrumentação e da coleta. Em um lote pequeno, os resultados serão conferidos com os mesmos mutantes e todos os testes selecionados. Se a filtragem não funcionar de forma consistente, o planejamento de tempo considerará a execução desse conjunto de testes para cada mutante.
+    \item \textbf{Limites de tempo e de revisão manual.} O piloto medirá o tempo por mutante e por módulo, a ocorrência de tempos limite e o tempo necessário para classificar um sobrevivente. O parâmetro \texttt{--timeout-factor} define o limite de espera pelo resultado de cada mutante como um múltiplo da duração da linha de base medida pelo MutPy, com base mínima de um segundo. A partir das medidas, serão definidos um orçamento de execução por projeto e um limite de sobreviventes para a classificação independente pelos dois avaliadores. Caso o tempo projetado exceda o orçamento, o recorte de módulos ou a taxa de amostragem será ajustado antes da execução final.
+\end{itemize}
+
+\subsection{Dados Coletados}
+\label{subsec:dados-coletados}
+
+A Tabela~\ref{quad:dados-coletados} resume os dados coletados em cada aplicação e o seu uso na análise.
+
+\begin{table}[htb]
+    \centering
+    \caption{Dados coletados por aplicação}
+    \label{quad:dados-coletados}
+    \begin{tabular}{p{4.5cm}p{4.5cm}p{5.5cm}}
+        \toprule
+        \textbf{Dado} & \textbf{Fonte} & \textbf{Uso na análise} \\
+        \midrule
+        Mutantes gerados, mortos, sobreviventes, com tempo limite ou inválidos & Relatório da ferramenta de mutação & Calcular o \textit{mutation score} a partir dos estados registrados \\
+        Operador e módulo de cada mutante & Relatório da ferramenta de mutação & Comparar o escore por tipo de alteração e por módulo \\
+        Mutantes equivalentes identificados & Classificação manual dos sobreviventes (Seção~\ref{sec:analise-validade}) & Calcular o escore ajustado no recorte com revisão completa \\
+        Cobertura de linhas e de ramos & Ferramenta de cobertura de Python & Contextualizar o alcance da suíte no código avaliado \\
+        Tempo de execução da suíte e da mutação & Medição no ambiente de execução & Estimar o custo da análise \\
+        \bottomrule
+    \end{tabular}
+    \legend{Fonte: Autor (2026).}
+\end{table}
+
+\section{Análise dos Resultados e Ameaças à Validade}
+\label{sec:analise-validade}
+
+A métrica principal é o \textit{mutation score} sobre os mutantes não equivalentes, a mais usada na RSL (Seção~\ref{subsec:metricas-utilizadas}). O escore bruto será calculado com $E = 0$ a partir dos estados dos mutantes, com inválidos e tempos limite informados separadamente. O escore ajustado pela equivalência será calculado para o recorte cujos sobreviventes tiverem sido integralmente revisados. Quando a revisão abranger apenas uma amostra de sobreviventes, as proporções das categorias serão apresentadas para essa amostra. A análise será descritiva por aplicação, por operador e por módulo. Com apenas seis aplicações, a relação entre cobertura e escore será examinada de forma exploratória, sem inferência estatística, e comparada às conclusões de \citeonline{inozemtseva2014} e de \citeonline{just2014}.
+
+Os mutantes sobreviventes serão classificados em três categorias, que correspondem aos fatores mais frequentes da RSL Seção~\ref{subsec:fatores-sobrevivencia}: equivalente, sem diferença de comportamento a detectar; difícil de detectar, em que a alteração altera o estado interno mas o efeito não chega a um resultado observado (infecção sem propagação); e inadequação da suíte, por falta de cobertura ou de verificações \cite{ammann2016, barr2015}. Dois anotadores classificarão os sobreviventes de forma independente, com procedimento de decisão de equivalência como o de \citeonline{yao2014}, e a concordância será medida pelo coeficiente kappa de Cohen, com divergências resolvidas por consenso. Se houver muitos sobreviventes, será classificada uma amostra estratificada por operador.
+
+As ameaças à validade seguem as quatro categorias de \citeonline{wohlin2015}, vistas na Seção~\ref{subsec:planejamento-mensuracao}:
+
+\begin{itemize}
+    \item \textbf{Externa:} seis projetos Python, escolhidos de forma não aleatória, não permitem generalizar para outras linguagens nem para outras aplicações web. Variar o tamanho e o domínio dos projetos reduz a ameaça \cite{ashong2025b};
+    \item \textbf{Construção:} mutantes não são defeitos reais, embora \citeonline{just2014} mostrem associação entre os dois. Como a mutação atinge só o código Python, o escore não mede a detecção de alterações na interface ou na navegação \cite{li2014webtesting};
+    \item \textbf{Interna:} a classificação de equivalência é subjetiva e testes instáveis distorcem o escore. Os dois anotadores, a concordância medida e a execução repetida da linha de base reduzem a ameaça;
+    \item \textbf{Conclusão:} a amostra pequena de aplicações e a amostragem de mutantes tornam o escore uma estimativa. Por isso, o resultado será descrito sem generalização estatística;
+    \item \textbf{Reprodutibilidade:} o registro das versões, das dependências e das datas de coleta (Seção~\ref{sec:selecao-preparacao}) permite repetir a análise \cite{vidoni2022}.
+\end{itemize}
+
+\section{Decisões em Aberto para o TCC 2}
+\label{sec:decisoes-abertas}
+
+As atividades da segunda etapa estão na Seção~\ref{subsec:segunda-etapa}. Os seis projetos e as famílias de operadores AOR, LCR, ROR, UOI e SBR já foram definidos. Com o MutPy como ferramenta prevista, permanecem em aberto as seguintes decisões:
+
+\begin{itemize}
+    \item Fixar a versão do MutPy e dos executores de testes, confirmar a compatibilidade com os seis projetos e validar o uso de COI e SDL como aproximações de UOI e SBR (Seção~\ref{subsec:ferramenta-operadores}).
+    \item Definir os módulos e testes de cada projeto, confirmar o funcionamento da filtragem por cobertura e estabelecer a taxa de amostragem ou a cota por módulo, o fator de tempo limite e o orçamento de execução a partir das medições do piloto (Seção~\ref{subsec:execucao-controle-custo}).
+    \item Definir o tamanho da amostra de sobreviventes a classificar em função do volume observado e do tempo disponível para avaliação independente e consenso (Seção~\ref{sec:analise-validade}).
+\end{itemize}
