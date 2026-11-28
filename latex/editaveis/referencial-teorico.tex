@@ -2,24 +2,18 @@
 
 O referencial teórico é composto pelos estudos e trabalhos que foram utilizados como base para a realização da pesquisa. Desse modo, este capítulo apresenta os conceitos-chave, modelos e metodologias que guiaram a execução deste trabalho: a engenharia de software experimental, os testes automatizados de aplicações web, a cobertura de código e o teste de mutação.
 
-\todo[inline, color=pink]{Exemplo de nota ao longo do texto, na cor rosa.}
-
-
 \section{Engenharia de Software Empírica}
 \label{sec:eng-software-empirica}
 
-A Engenharia de Software é uma área fortemente influenciada pelo comportamento humano e por decisões sobre abordagens, ferramentas, técnicas e métodos de desenvolvimento. Por isso, diferentemente de áreas como a física, não é possível formular regras ou leis universais, exceto para aspectos estritamente técnicos. Ainda assim, é preciso escolher entre alternativas e validar propostas existentes. A experimentação oferece uma forma sistemática, controlada e quantificável de avaliar as atividades da área, o que dá base científica à comparação de abordagens e à validação de propostas \cite{wohlin2015}. A Engenharia de Software Empírica, ou Experimental, é a vertente da área que produz conhecimento a partir de evidências observadas, e não de opinião ou de argumentos teóricos, e que pode trabalhar com dados quantitativos, em forma de números, ou qualitativos, em forma de texto e de observações \cite{wohlin2015}. Este trabalho se apoia nessa base para avaliar, de forma objetiva, se as suítes de testes automatizados de aplicações web detectam falhas.
+A Engenharia de Software é uma área fortemente influenciada pelo comportamento humano e por decisões sobre abordagens, ferramentas, técnicas e métodos de desenvolvimento. Por isso, diferentemente de áreas como a física, não é possível formular regras ou leis universais, exceto para aspectos estritamente técnicos. Ainda assim, é preciso escolher entre alternativas e validar propostas existentes. A experimentação oferece uma forma sistemática, controlada e quantificável de avaliar as atividades da área, o que dá base científica à comparação de abordagens e à validação de propostas \cite{wohlin2015}. A Engenharia de Software Empírica, é a vertente da área que produz conhecimento a partir de evidências observadas, e não de opinião ou de argumentos teóricos, e que pode trabalhar com dados quantitativos, em forma de números, ou qualitativos, em forma de texto e de observações \cite{wohlin2015}. Este trabalho se apoia nessa base para avaliar, de forma objetiva, se as suítes de testes automatizados de aplicações web detectam falhas.
 
-\citeonline{basili1994} apresentou quatro métodos de pesquisa na Engenharia de Software: o científico (\textit{scientific}), o de engenharia (\textit{engineering}), o empírico (\textit{empirical}) e o analítico (\textit{analytical}). No método científico, o pesquisador observa o mundo e constrói um modelo a partir da observação. No método de engenharia, estudam-se as soluções existentes e propõem-se melhorias, que são então avaliadas. No método empírico, propõe-se um modelo e ele é avaliado por estudos empíricos, como estudos de caso e experimentos. No método analítico, propõe-se uma teoria formal que é comparada com observações empíricas \cite{wohlin2015}. O método empírico é amplamente usado em ciências sociais e na psicologia para estudar o comportamento humano em contextos nos quais leis formais não se aplicam, e é igualmente aplicável à Engenharia de Software quando é preciso lidar com aspectos que não são puramente técnicos \cite{wohlin2015}.
+\citeonline{wohlin2015} apresentaram quatro métodos de pesquisa na Engenharia de Software: o científico (\textit{scientific}), o de engenharia (\textit{engineering}), o empírico (\textit{empirical}) e o analítico (\textit{analytical}). No método científico, o pesquisador observa o mundo e constrói um modelo a partir da observação. No método de engenharia, estudam-se as soluções existentes e propõem-se melhorias, que são então avaliadas. No método empírico, propõe-se um modelo e ele é avaliado por estudos empíricos, como estudos de caso e experimentos. No método analítico, propõe-se uma teoria formal que é comparada com observações empíricas \cite{wohlin2015}. O método empírico é amplamente usado em ciências sociais e na psicologia para estudar o comportamento humano em contextos nos quais leis formais não se aplicam, e é igualmente aplicável à Engenharia de Software quando é preciso lidar com aspectos que não são puramente técnicos \cite{wohlin2015}.
 
 Entre as estratégias de investigação empírica apresentadas por \citeonline{wohlin2015} estão a \textit{survey}, o estudo de caso e o experimento. A \textit{survey} coleta informações de um grupo de pessoas, em geral por questionários ou entrevistas, para descrever, comparar ou explicar suas opiniões e comportamentos. O estudo de caso investiga um fenômeno contemporâneo em seu contexto real, sem intervenção ou controle, o que o torna um estudo observacional. O experimento, ao contrário, busca controle sistemático e direto sobre a situação estudada e é normalmente usado para comparar tratamentos \cite{wohlin2015}. Assim, o experimento favorece a identificação de relações de causa e efeito, enquanto o estudo de caso favorece o realismo do contexto, ao custo de menor controle. A escolha entre as estratégias depende do objetivo, do controle possível sobre o contexto e dos recursos disponíveis, e elas podem ser combinadas em um mesmo estudo \cite{wohlin2015}.
-
 
 \citeonline{wohlin2015} propõem uma estrutura para apoiar a escolha do desenho de uma pesquisa empírica em Engenharia de Software, que organiza oito pontos de decisão em três fases: a estratégica (resultado, lógica, propósito e abordagem da pesquisa), a tática (processo e metodologia de pesquisa) e a operacional (métodos de coleta e de análise de dados). Na fase tática, os autores tratam três metodologias de pesquisa: o estudo de caso, que investiga um fenômeno, contemporâneo ou histórico, em seu ambiente natural, usando múltiplos métodos de coleta de dados; a pesquisa-ação, que busca resolver um problema organizacional por meio de intervenções e, ao mesmo tempo, gerar conhecimento; e a \textit{design science}, que constrói e avalia um artefato para atender aos requisitos de um problema \cite{wohlin2015}. Essa estrutura é usada na Seção~\ref{sec:metodologia} para descrever a metodologia deste trabalho.
 
 Para fundamentar uma pesquisa empírica, também se utiliza a Revisão Estruturada da Literatura, que reúne e sintetiza evidências de diversas fontes por meio de um protocolo com questões de pesquisa, estratégia de busca e critérios de inclusão e exclusão, o que reduz vieses e permite a reprodução \cite{kitchenham2007}.
-
-\todo[inline, color=pink]{Faltou caracterizar melhor a engenharia de software empírica/experimental, os principais métodos e estratégias de pesquisa e relação com a mineração de repositorios de codigo-fonte. Ex: os experimentos, estuddos de caso, etc. Tem todo o livro do wohlin, o guia da revisão. Ainda tem o capitulo 4 que é exatamento o planejamento do estudo emprírico. Ficou muito superficial.}
 
 \subsection{Planejamento e Mensuração em Estudos Empíricos}
 \label{subsec:planejamento-mensuracao}
@@ -29,9 +23,6 @@ Segundo \citeonline{wohlin2015}, o processo de um experimento tem cinco atividad
 A mensuração associa valores a atributos das entidades estudadas. \citeonline{wohlin2015} distinguem medidas diretas e indiretas e as escalas nominal, ordinal, intervalar e de razão. O \textit{indicador de mutação} (Seção~\ref{subsec:mutation-score}), por exemplo, é uma medida indireta, calculada pela razão entre mutantes mortos e mutantes não equivalentes. As ameaças à validade são classificadas em quatro tipos: de conclusão, relacionada à consistência das conclusões; interna, relacionada à relação entre tratamento e resultado; de construto, relacionada à adequação das medidas aos conceitos; e externa, relacionada à generalização dos resultados \cite{wohlin2015}. Em estudos com diferentes projetos de software, características como linguagem, arquitetura e tamanho das suítes de testes podem influenciar os resultados e devem ser consideradas na sua interpretação.
 
 \subsection{Mineração de Repositórios de Software}
-
-\todo[inline, color=pink]{Quando forem escrever o cap. 4 garantam que, no mínimo, os atributos essenciais descritos no guia do método estarão garantidos: \href{https://www2.sigsoft.org/EmpiricalStandards/docs/standards?standard=RepositoryMining\#}{EmpiricalStandards}}
-
 
 A mineração de repositórios (\textit{Repository Mining}) é definida nos padrões empíricos da ACM SIGSOFT como um estudo que analisa quantitativamente um conjunto de dados extraído de uma plataforma que hospeda texto estruturado ou semiestruturado, como um repositório de código-fonte. O padrão se aplica a estudos que usam técnicas automatizadas para extrair dados de repositórios de grande escala, como repositórios de código-fonte, arquivos de listas de e-mail e sistemas de rastreamento de defeitos, e que analisam quantitativamente o conteúdo extraído \cite{acmsigsoft}. Neste trabalho, a mineração de repositórios é situada no método empírico de \citeonline{basili1994}, pois avalia uma solução com dados observados, sem intervenção do pesquisador nos projetos estudados.
 
@@ -56,14 +47,6 @@ Como atributos essenciais, o padrão exige que o estudo \cite{acmsigsoft}:
 
 Entre os atributos desejáveis, o padrão indica a disponibilização de materiais suplementares, como o conjunto de dados completo e as ferramentas usadas para obter e processar os repositórios, o uso de amostragem probabilística, a triangulação entre fontes de dados e a discussão de questões éticas da mineração, como a privacidade dos dados. Os critérios gerais de qualidade são a validade interna, a validade externa, a validade de construto e a confiabilidade \cite{acmsigsoft}.
 
-\subsubsection{Qualidade de Produto de Software}
-
-A qualidade de um produto de software é o grau em que ele satisfaz as necessidades de seus usuários e demais partes interessadas. Modelos de referência organizam essa avaliação em características e subcaracterísticas. A norma ISO/IEC 25010, da série SQuaRE, define o modelo de qualidade do produto. Sua versão de 2011 tem oito características: adequação funcional, eficiência de desempenho, compatibilidade, usabilidade, confiabilidade, segurança, manutenibilidade e portabilidade \cite{iso25010_2011}. A edição de 2023 tem nove: substitui usabilidade por capacidade de interação e portabilidade por flexibilidade, e acrescenta \textit{safety} (segurança operacional) \cite{iso25010_2023}.
-
-O teste de software é uma atividade de verificação e validação (V\&V). A verificação avalia se o produto de uma fase atende aos requisitos estabelecidos na fase anterior, e a validação avalia se o software atende ao uso pretendido \cite{ammann2016}. Ao executar o software e comparar o comportamento observado com o esperado, o teste fornece evidências para avaliar a qualidade do produto, em especial a adequação funcional e a confiabilidade, mas não garante a ausência de defeitos \cite{ammann2016}.
-
-A evidência produzida por uma suíte de testes só é confiável se a própria suíte for capaz de detectar defeitos. Por isso, avaliar a eficácia das suítes automatizadas, objetivo deste trabalho, é uma forma de avaliar a qualidade da atividade de verificação que sustenta a qualidade do produto. Os testes de mutação (Seção~\ref{subsec:testes-mutacao}) fazem essa avaliação ao introduzir defeitos artificiais e verificar se os testes os detectam.
-
 \subsubsection{Seleção e Extração de Dados}
 
 Na MSR, os objetivos e as questões de pesquisa orientam a escolha das fontes de dados e a definição dos critérios de inclusão e exclusão. \citeonline{vidoni2022} distingue as plataformas que hospedam os projetos, os repositórios selecionados e os dados extraídos de cada um, como código-fonte, histórico de commits e registros de problemas.
@@ -76,9 +59,6 @@ Após a extração, os dados devem ser examinados e preparados para análise. Re
 
 Para favorecer a reprodutibilidade, devem ser registrados os repositórios e as versões analisadas, as datas de coleta, os dados extraídos, as ferramentas utilizadas e os procedimentos de processamento e análise. Esse registro permite rastrear a origem dos resultados e repetir o procedimento sobre as mesmas versões dos repositórios \cite{vidoni2022}.
 
-
-\todo[inline, color=pink]{Incluir uma subseção que  apresente o assunto de qualidade de produto de software, relacionando modelos de qualidade de referencia, como a ISO/IEC 25010, com a avaliação de testes automatizados. Destaquem que o teste de software é uma atividade de verificação e validação que contribui para a avaliação da qualidade do produto.}
-
 \section{Testes de Software}
 
 Os testes de software são atividades utilizadas para avaliar o comportamento de um sistema e identificar diferenças entre os resultados observados e aqueles esperados. Segundo \citeonline{ammann2016}, os testes permitem verificar o comportamento de um programa por meio de sua execução, contribuindo para a identificação de defeitos e para a redução dos riscos associados à utilização do software.
@@ -86,6 +66,14 @@ Os testes de software são atividades utilizadas para avaliar o comportamento de
 Entretanto, a execução de testes não garante a ausência de defeitos. Conforme discutido por \citeonline{ammann2016}, não é possível, na maioria dos sistemas, verificar todas as combinações de entradas e condições de execução. Dessa forma, os testes são selecionados com base em critérios que procuram avaliar os comportamentos mais relevantes do programa.
 
 A capacidade de uma suíte identificar problemas depende de fatores como a escolha dos casos de teste, os dados utilizados, os comportamentos exercitados e as verificações realizadas sobre os resultados. Por esse motivo, além da execução dos testes, é necessário avaliar sua adequação e capacidade de detectar comportamentos incorretos \cite{ammann2016}.
+
+\subsubsection{Qualidade de Produto de Software}
+
+A qualidade de um produto de software é o grau em que ele satisfaz as necessidades de seus usuários e demais partes interessadas. Modelos de referência organizam essa avaliação em características e subcaracterísticas. A norma ISO/IEC 25010, da série SQuaRE, define o modelo de qualidade do produto. Sua versão de 2011 tem oito características: adequação funcional, eficiência de desempenho, compatibilidade, usabilidade, confiabilidade, segurança, manutenibilidade e portabilidade \cite{iso25010_2011}. A edição de 2023 tem nove: substitui usabilidade por capacidade de interação e portabilidade por flexibilidade, e acrescenta \textit{safety} (segurança operacional) \cite{iso25010_2023}.
+
+O teste de software é uma atividade de verificação e validação (V\&V). A verificação avalia se o produto de uma fase atende aos requisitos estabelecidos na fase anterior, e a validação avalia se o software atende ao uso pretendido \cite{ammann2016}. Ao executar o software e comparar o comportamento observado com o esperado, o teste fornece evidências para avaliar a qualidade do produto, em especial a adequação funcional e a confiabilidade, mas não garante a ausência de defeitos \cite{ammann2016}.
+
+A evidência produzida por uma suíte de testes só é confiável se a própria suíte for capaz de detectar defeitos. Por isso, avaliar a eficácia das suítes automatizadas, objetivo deste trabalho, é uma forma de avaliar a qualidade da atividade de verificação que sustenta a qualidade do produto. Os testes de mutação (Seção~\ref{subsec:testes-mutacao}) fazem essa avaliação ao introduzir defeitos artificiais e verificar se os testes os detectam.
 
 \subsection{Testes Automatizados e Suítes de Testes}
 
@@ -96,8 +84,6 @@ Uma suíte de testes corresponde a um conjunto organizado de casos de teste util
 As suítes automatizadas podem atuar em diferentes níveis de teste. Os testes unitários verificam componentes individuais, como funções e métodos. Os testes de integração avaliam a interação entre componentes ou serviços, enquanto os testes de sistema procuram verificar o comportamento da aplicação como um todo. Os testes de ponta a ponta (\textit{end-to-end}) também podem ser utilizados para validar fluxos completos de utilização do sistema \cite{ammann2016}.
 
 A automação também está relacionada às práticas de integração contínua, nas quais verificações são executadas frequentemente durante o desenvolvimento. \citeonline{ammann2016} abordam a integração contínua como uma prática que permite executar testes regularmente, contribuindo para identificar problemas após modificações no código-fonte.
-
-É importante salientar que executar testes frequentemente não significa necessariamente que eles sejam capazes de identificar todos os defeitos introduzidos no software. Por isso, além de verificar se uma suíte executa corretamente, é necessário avaliar sua capacidade de reconhecer comportamentos incorretos.
 
 \subsection{Eficácia de Suítes de Testes}
 
@@ -188,8 +174,6 @@ Na \textbf{mutação forte} (\textit{Strong Mutation}), um mutante é considerad
 
 Já na \textbf{mutação fraca} (\textit{Weak Mutation}), a avaliação ocorre imediatamente após a execução do trecho modificado. Nesse caso, o mutante pode ser considerado morto quando a alteração produz uma diferença no estado interno do programa, mesmo que essa diferença não seja propagada até a saída final.
 
-Portanto, um mutante pode ser morto segundo o critério de mutação fraca e permanecer sobrevivente segundo o critério de mutação forte. Essa distinção é importante porque demonstra que a execução de uma alteração e a modificação do estado interno não garantem, necessariamente, que seu efeito seja identificado nos resultados do programa \cite{ammann2016}.
-
 \subsection{Operadores de Mutação e Tipos de Mutantes}
 
 Os operadores de mutação são responsáveis por definir as alterações que serão introduzidas no programa original. Sua escolha é importante porque determina os tipos de modificações que poderão ser avaliadas.
@@ -208,11 +192,7 @@ Além desses, \citeonline{ammann2016} apresentam operadores de inserção e remo
 
 Existem também operadores desenvolvidos para exigir determinados comportamentos dos testes. Um exemplo é o operador \textit{Bomb Statement Replacement} (BSR), que substitui uma instrução por uma operação que provoca uma falha quando executada. Dessa forma, o mutante somente pode ser morto por um teste que alcance a instrução modificada, estabelecendo uma relação com o critério de cobertura de instruções.
 
-Os exemplos demonstram que os operadores não possuem necessariamente a mesma finalidade. Enquanto alguns representam alterações semelhantes a possíveis erros de programação, outros são utilizados para exigir que determinados elementos do código sejam exercitados ou verificados pelos testes.
-
 Os mutantes também podem ser classificados de acordo com a quantidade de alterações introduzidas. Os \textbf{mutantes de primeira ordem} (\textit{First-Order Mutants} -- FOM) são produzidos pela aplicação de uma única alteração, enquanto os \textbf{mutantes de ordem superior} (\textit{Higher-Order Mutants} -- HOM) combinam duas ou mais alterações em uma mesma versão do programa.
-
-\citeonline{ammann2016} destacam que a aplicação de uma alteração por mutante é geralmente preferida na mutação de programas, embora existam situações em que combinações de alterações possam ser úteis.
 
 A escolha e a quantidade dos operadores também influenciam o custo da análise. Dependendo das características do programa, sua aplicação pode produzir um grande número de mutantes, exigindo diversas execuções da suíte de testes.
 
@@ -236,15 +216,10 @@ O cálculo da métrica pode ser representado pela seguinte expressão:
 
 Em que $K$ representa a quantidade de mutantes mortos, $M$ corresponde ao total de mutantes válidos gerados e $E$ representa a quantidade de mutantes equivalentes entre esses mutantes.
 
-Um resultado de 90\%, por exemplo, indica que a suíte conseguiu detectar 80\% dos mutantes válidos e não equivalentes considerados na avaliação.
+Um resultado de 80\%, por exemplo, indica que a suíte conseguiu detectar 80\% dos mutantes válidos e não equivalentes considerados na avaliação.
 
 Entretanto, alcançar resultado alto como esse pode ser difícil, na prática. Por esse motivo, os autores também apresentam a possibilidade de estabelecer um limiar mínimo de adequação, utilizado para orientar a continuidade do processo de testes.
 
 É importante destacar que a adequação é relativa ao conjunto de mutantes utilizado. Uma suíte que apresenta um Indicador de Mutação elevado não necessariamente consegue detectar todos os defeitos reais do programa, pois os mutantes representam apenas as alterações produzidas pelos operadores selecionados.
 
-A relação entre detecção de mutantes e defeitos reais também é importante para a interpretação dessa métrica. \citeonline{just2014} discutem a utilização de mutantes como uma aproximação para avaliar a capacidade de detecção de defeitos reais, embora reconheçam que nem todos os defeitos possam ser representados pelas alterações artificiais disponíveis.
-
 Dessa forma, sua interpretação pode ser complementada por informações como cobertura de código, quantidade de mutantes sobreviventes, operadores aplicados e características dos casos de teste avaliados. Esses indicadores permitem compreender melhor os resultados da avaliação e identificar possíveis limitações das suítes automatizadas.
-
-
-\todo[inline, color=pink]{Essa parte de testes automatizados e testes de mutação ficou muito boa. Contudo, como você precisaram acertar a parte de engenharia de software experimental, talvez seja necessário resumir mais um pouco. Vejam essa equilíbrio no total de páginas do tcc. }
